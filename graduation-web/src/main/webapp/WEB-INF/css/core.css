@@ -1,0 +1,185 @@
+
+
+.hx-wf-routeconfig-li-button{
+	width: 50px;
+	text-align:center;
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+
+.hx-wf-routeconfig-ul{
+	width:90%;
+}
+.hx-wf-routeconfig-li{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-routeconfig-li-choose{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#3afafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-routeconfig-indicator{
+	position:absolute;
+	font-size:9px;
+	width:10px;
+	height:10px;
+	display:none;
+	color:red;
+	z-index: 5000;
+}
+
+
+
+.hx-wf-routeconfig-dtl-ul{
+	width:90%;
+}
+.hx-wf-routeconfig-dtl-li{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-routeconfig-dtl-li-choose{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#3afafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-routeconfig-dtl-indicator{
+	position:absolute;
+	font-size:9px;
+	width:10px;
+	height:10px;
+	display:none;
+	color:red;
+	z-index: 5000;
+}
+
+.hx-wf-projvalconfig-li-button{
+	width: 50px;
+	text-align:center;
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+
+.hx-wf-projvalconfig-ul{
+	width:90%;
+}
+.hx-wf-projvalconfig-li{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-projvalconfig-li-choose{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#3afafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-projvalconfig-indicator{
+	position:absolute;
+	font-size:9px;
+	width:10px;
+	height:10px;
+	display:none;
+	color:red;
+	z-index: 5000;
+}
+
+
+
+.hx-wf-projvalconfig-dtl-ul{
+	width:90%;
+}
+.hx-wf-projvalconfig-dtl-li{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#fafafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-projvalconfig-dtl-li-choose{
+	list-style-type:none;
+	display:block;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:2px;
+	background:#3afafa;
+	color:#444;
+	float:left;
+	cursor: pointer;
+	-moz-user-select:none;
+}
+.hx-wf-projvalconfig-dtl-indicator{
+	position:absolute;
+	font-size:9px;
+	width:10px;
+	height:10px;
+	display:none;
+	color:red;
+	z-index: 5000;
+}
+
+

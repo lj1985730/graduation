@@ -11,7 +11,6 @@ import javax.validation.ConstraintViolationException;
 
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.core.base.exception.BusinessException;
-import com.graduation.core.base.util.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,35 +36,6 @@ public abstract class BaseController {
 	 * 页面相对路径
 	 */
 	private static final String DEFAULT_TEMPLATE = "/jsp";
-	
-    /**
-     * 处理菜单Id传值，页面无须处理菜单被选中逻辑
-     * 安全性逻辑代码暂时注释掉，考虑引入spring security统一管理
-     */
-	@ModelAttribute("menuId")
-    private String setMenuId(@RequestParam(required = false, value = "menuId") String menuId, HttpServletRequest request, HttpServletResponse response) {
-    	// 只处理点击页面跳转的请求
-    	if(menuId != null) {
-    		
-    		//如果不是菜单跳转,直接返回登录
-//    		if(!StringUtils.endsWith(request.getRequestURL().toString(), "/index")) {
-//    			response.sendRedirect(request.getContextPath() + "/error");
-//    		}
-    		//权限校验
-//    		List<String> authMenuIds = (List<String>)request.getSession().getAttribute(CookieUtil.SESSION_AUTH_MENU_KEY);
-//    		if(authMenuIds == null || authMenuIds.size() == 0 || !authMenuIds.contains(lsMenuId)) {
-//    			response.sendRedirect(request.getContextPath() + "/error");
-//    		}
-    		
-    		if(!StringUtils.endsWith(request.getRequestURL().toString(), "/home")) {	//排除掉管理首页
-    			//将本次访问的路径存储在session中
-    			CookieUtil.setCookie(response, CookieUtil.COOKIE_LAST_MENU_KEY, menuId);
-    		}
-    		return menuId;
-    	} else {
-    		return null;
-    	}
-    }
 
 	/**
 	 * 返回页面视图

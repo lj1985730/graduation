@@ -36,7 +36,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * 根据名字获取bean。
 	 * @param name bean名字
 	 * @return bean
-	 * @throws BeansException
 	 */
 	public static Object getBean(String name) throws BeansException {
 		return applicationContext.getBean(name);
@@ -48,7 +47,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @param name 类型名
 	 * @param requiredType 类型
 	 * @return bean
-	 * @throws BeansException
 	 */
 	public static <T> T getBean(String name, Class<T> requiredType) throws BeansException {
 		return applicationContext.getBean(name, requiredType);
@@ -67,7 +65,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * 是否是单例的
 	 * @param name Spring bean对象名
 	 * @return 是否是单例
-	 * @throws NoSuchBeanDefinitionException
 	 */
 	public static boolean isSingleton(String name) throws NoSuchBeanDefinitionException {
 		return applicationContext.isSingleton(name);
@@ -77,7 +74,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * 获取bean类型
 	 * @param name Spring bean对象名
 	 * @return bean类型
-	 * @throws NoSuchBeanDefinitionException
 	 */
 	public static <T> Class<?> getType(String name) throws NoSuchBeanDefinitionException {
 		return applicationContext.getType(name);
@@ -87,7 +83,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * 获取别名
 	 * @param name Spring对象名
 	 * @return Spring别名
-	 * @throws NoSuchBeanDefinitionException
 	 */
 	public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
 		return applicationContext.getAliases(name);
@@ -97,7 +92,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * 获取Spring上下文的资源文件输入流。
 	 * @param path Spring上下文位置
 	 * @return 上下文的资源文件
-	 * @throws IOException
 	 */
 	public static Resource getResource(String path) throws IOException {
 		return applicationContext.getResource(path);

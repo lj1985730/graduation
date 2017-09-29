@@ -2,11 +2,11 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.*;
 import com.graduation.authentication.base.service.SystemLoader;
+import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.entity.BaseEntity;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.BaseService;
 import com.graduation.core.base.util.EntityUtil;
-import com.graduation.core.base.util.WebUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
@@ -118,8 +118,8 @@ public class LoginService extends BaseService<BaseEntity> {
 			roleIdStr += roles.get(i).getId() + separator;
 			roleIdArr[i] = roles.get(i).getId();
 		}
-		WebUtil.setInfo(WebUtil.LoginInfo.ROLE_ID, StringUtils.removeEnd(roleIdStr, separator));
-		WebUtil.setInfo(WebUtil.LoginInfo.ROLE_ID_ARR, roleIdArr);
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ROLE_ID, StringUtils.removeEnd(roleIdStr, separator));
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ROLE_ID_ARR, roleIdArr);
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class LoginService extends BaseService<BaseEntity> {
 			postIdStr += posts.get(i).getId() + separator;
 			postIdArr[i] = posts.get(i).getId();
 		}
-		WebUtil.setInfo(WebUtil.LoginInfo.POST_ID, StringUtils.removeEnd(postIdStr, separator));
-		WebUtil.setInfo(WebUtil.LoginInfo.POST_ID_ARR, postIdArr);
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.POST_ID, StringUtils.removeEnd(postIdStr, separator));
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.POST_ID_ARR, postIdArr);
 	}
 
 	/**
@@ -148,9 +148,9 @@ public class LoginService extends BaseService<BaseEntity> {
 	 */
 	private void bookPersonInfo(Account account) {
 		Person person = account.getPerson();
-		WebUtil.setInfo(WebUtil.LoginInfo.PERSON_ID, person.getId());
-		WebUtil.setInfo(WebUtil.LoginInfo.PERSON_NAME, person.getName());
-		WebUtil.setInfo(WebUtil.LoginInfo.PERSON_EMAIL, person.getEmail());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_ID, person.getId());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_NAME, person.getName());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_EMAIL, person.getEmail());
 	}
 
 	/**
@@ -158,9 +158,9 @@ public class LoginService extends BaseService<BaseEntity> {
 	 * @param account 账户信息
 	 */
 	private void bookAccountInfo(Account account) {
-		WebUtil.setInfo(WebUtil.LoginInfo.ACCOUNT_ID, account.getId());
-		WebUtil.setInfo(WebUtil.LoginInfo.ACCOUNT_NAME, account.getName());
-		WebUtil.setInfo(WebUtil.LoginInfo.SUPER_ACCOUNT, account.getSuperAccount());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID, account.getId());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ACCOUNT_NAME, account.getName());
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.SUPER_ACCOUNT, account.getSuperAccount());
 	}
 
 	/**
@@ -179,9 +179,9 @@ public class LoginService extends BaseService<BaseEntity> {
 		StringBuilder menuIdStr = new StringBuilder("");
 		menuIds.forEach(menuId -> menuIdStr.append(menuId).append(separator));
 
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
 	}
 
 
@@ -201,9 +201,9 @@ public class LoginService extends BaseService<BaseEntity> {
 		StringBuilder menuIdStr = new StringBuilder("");
 		menuIds.forEach(menuId -> menuIdStr.append(menuId).append(separator));
 
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
-		WebUtil.setInfo(WebUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
+		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
 	}
 
 	/**

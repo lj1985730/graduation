@@ -36,19 +36,19 @@ public class BaseEntity implements Serializable {
 	/**
 	 * 操作人账户Id
 	 */
-	protected String lastModifyAccountId;
+	private String lastModifyAccountId;
 
 	/**
 	 * 操作时间
 	 */
 	@NotNull(message = "操作时间不可为空！")
-	protected LocalDateTime lastModifyTime;
+	private LocalDateTime lastModifyTime;
 
     /**
      * 是否删除
      */
 	@NotNull(message = "删除标记不可为空！")
-	protected Boolean deleted;
+	private Boolean deleted;
 
 	@Id
 	@GeneratedValue(generator = "departmentGenerator")

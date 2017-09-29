@@ -365,7 +365,6 @@ public class BaseDao {
 	/**
 	 * 获取数据库连接，session绑定，不建议使用
 	 * @return 数据库连接对象
-	 * @throws SQLException
 	 */
 	public Connection getConnection() throws SQLException {
 		return SessionFactoryUtils.getDataSource(sessionFactory).getConnection();

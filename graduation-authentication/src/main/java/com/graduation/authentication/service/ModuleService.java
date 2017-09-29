@@ -2,9 +2,9 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.Menu;
 import com.graduation.authentication.entity.Module;
+import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.service.BaseService;
-import com.graduation.core.base.util.CookieUtil;
-import com.graduation.core.base.util.WebUtil;
+import com.graduation.web.util.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -82,7 +82,7 @@ public class ModuleService extends BaseService<Module> {
 		//取快速访问页面
 		DetachedCriteria criteria = DetachedCriteria.forClass(Module.class);
 		criteria.add(Restrictions.eq(DELETE_PARAM, false));
-		criteria.add(Restrictions.eq("accountId", WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString()));
+		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.addOrder(Order.desc("lastModifyTime"));	//默认操作时间倒序
 		return this.searchByCriteria(criteria);
 	}
@@ -101,7 +101,7 @@ public class ModuleService extends BaseService<Module> {
 		//删除全部旧数据
 		if(oldModules != null && !oldModules.isEmpty()) {
 			oldModules.forEach(oldModule -> {
-				super.destory(oldModule.getId());	//物理删除
+				super.destroy(oldModule.getId());	//物理删除
 			});
 		}
 
@@ -119,12 +119,12 @@ public class ModuleService extends BaseService<Module> {
 	 */
 	public void delete(Serializable id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Module.class);
-		criteria.add(Restrictions.eq("accountId", WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString()));
+		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.add(Restrictions.eq("menuId", id));
 		List<Module> quickModules = this.searchByCriteria(criteria);
 
 		quickModules.forEach(quickModule -> {
-			super.destory(quickModule.getId());	//物理删除
+			super.destroy(quickModule.getId());	//物理删除
 		});
 	}
 	
@@ -135,7 +135,7 @@ public class ModuleService extends BaseService<Module> {
 
 	@Override
 	public void beforeCreate(Module entity) {
-		entity.setAccountId(WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString());
+		entity.setAccountId(AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString());
 	}
 
 	@Override

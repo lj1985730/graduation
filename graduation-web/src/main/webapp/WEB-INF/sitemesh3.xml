@@ -18,9 +18,6 @@
     <mapping path="/front/manage/cmsContent/photoDetail" exclue="true" />
     <mapping path="/front/manage/cmsContent/linkDetail" exclue="true" />
     <mapping path="/front/manage/cmsContent/login" exclue="true" />
-	<mapping path="/register" exclue="true" />
-	<mapping path="/register/doRegister" exclue="true" />
-	<mapping path="/seamapSCI/**" exclue="true" />
 	<mapping path="/authentication/fingerprint/validate" exclue="true" />
 	<mapping path="/authentication/fingerprint/register" exclue="true" />
 	<mapping path="/system/util/showPdf/**" exclue="true" />

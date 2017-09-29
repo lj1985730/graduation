@@ -1,5 +1,16 @@
 package com.graduation.core.base.service;
 
+import com.graduation.core.base.dao.BaseDao;
+import com.graduation.core.base.dto.JsonResult;
+import com.graduation.core.base.dto.Page;
+import com.graduation.core.base.entity.BaseEntity;
+import com.graduation.core.base.util.OrderByPinyin;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -8,20 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import com.graduation.core.base.dto.JsonResult;
-import com.graduation.core.base.dao.BaseDao;
-import com.graduation.core.base.dto.Page;
-import com.graduation.core.base.entity.BaseEntity;
-import com.graduation.core.base.util.OrderByPinyin;
-
-import com.graduation.core.base.util.WebUtil;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -253,7 +250,6 @@ public abstract class BaseService<E extends BaseEntity> {
 		beforeCreate(entity);
 		entity.setDeleted(false);
 		entity.setLastModifyTime(LocalDateTime.now());
-		entity.setLastModifyAccountId(WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString());
 		dao.save(entity);
     }
 
@@ -285,7 +281,6 @@ public abstract class BaseService<E extends BaseEntity> {
 		beforeDelete(entity);
 		entity.setDeleted(true);
 		entity.setLastModifyTime(LocalDateTime.now());
-		entity.setLastModifyAccountId(WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString());
 		dao.update(entity);
 	}
 
@@ -294,7 +289,7 @@ public abstract class BaseService<E extends BaseEntity> {
      * @param id 主键
      */
 	@Transactional(propagation = Propagation.REQUIRED)
-    public JsonResult destory(Serializable id) {
+    public JsonResult destroy(Serializable id) {
 		dao.delete(entityClass, id);
 		return new JsonResult(true, JsonResult.DELETE_SUCCEED);
     }
@@ -318,7 +313,6 @@ public abstract class BaseService<E extends BaseEntity> {
 		beforeUpdate(entity);
 		entity.setDeleted(false);
 		entity.setLastModifyTime(LocalDateTime.now());
-		entity.setLastModifyAccountId(WebUtil.getInfo(WebUtil.LoginInfo.ACCOUNT_ID).toString());
 		dao.update(entity);
     }
 }

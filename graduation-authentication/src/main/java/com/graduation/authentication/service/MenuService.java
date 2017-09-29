@@ -1,9 +1,9 @@
 package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.*;
+import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.TreeService;
-import com.graduation.core.base.util.WebUtil;
 import org.hibernate.criterion.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ public class MenuService extends TreeService<Menu> {
 	 * @return 用户菜单
      */
 	public List<Menu> getAccountMenu() {
-		return (List<Menu>) WebUtil.getInfo(WebUtil.LoginInfo.MENU_LIST);
+		return AuthenticationUtil.getMenuList();
 	}
 
 	/**

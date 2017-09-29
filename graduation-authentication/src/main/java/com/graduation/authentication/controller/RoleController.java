@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 2016-8-16 20:47:42
  */
 @Controller
-@RequestMapping(value = "**/system/authentication/role")
+@RequestMapping(value = "**/authentication/role")
 class RoleController extends BaseController {
 	
 	@Resource
@@ -40,9 +40,9 @@ class RoleController extends BaseController {
 	/**
 	 * 页面的首页
 	 */
-	@RequestMapping(value = { "/index" })
-	public String index() {
-		return pageView("/system/authentication/role");
+	@RequestMapping(value = { "/homeView" })
+	public String home() {
+		return pageView("/authentication/role");
 	}
 
 	/**

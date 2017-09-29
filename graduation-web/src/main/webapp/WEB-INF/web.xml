@@ -75,12 +75,12 @@
 	</servlet-mapping> -->
 
 	<!-- 标签库拦截配置 -->
-	<jsp-config>
+<!--	<jsp-config>
 		<taglib>
 			<taglib-uri>/lsTags</taglib-uri>
 			<taglib-location>/WEB-INF/tags/lsTags.tld</taglib-location>
 		</taglib>
-	</jsp-config>
+	</jsp-config>-->
 
 	<session-config>
 		<session-timeout>30</session-timeout>

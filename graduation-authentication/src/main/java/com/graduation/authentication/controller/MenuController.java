@@ -37,8 +37,8 @@ class MenuController extends BaseController {
     /**
      * 页面的首页
      */
-    @RequestMapping(value = { "/index" })
-    public String index() {
+    @RequestMapping(value = { "/homeView" })
+    public String home() {
         return pageView("/authentication/menu");
     }
 

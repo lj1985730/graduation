@@ -1,34 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.graduation</groupId>
-  <artifactId>graduation-framework</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+    <groupId>com.graduation</groupId>
+    <artifactId>graduation-framework</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
 
-  <build>
-    <finalName>graduation-framework</finalName>
-  </build>
+    <properties>
+        <mvn.repo>127.0.0.1:19080</mvn.repo>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <core.version>2.1.2-SNAPSHOT</core.version>
+    </properties>
 
-  <modules>
-    <module>graduation-import</module>
-    <module>graduation-core</module>
-    <module>graduation-authentication</module>
-    <module>bus-manage</module>
-    <module>graduation-web</module>
-  </modules>
+    <repositories>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <repository>
+            <id>graduation-release</id>
+            <name>libs-release</name>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <url>http://${mvn.repo}/nexus/libs-release</url>
+        </repository>
+
+        <repository>
+            <id>graduation-snapshots</id>
+            <name>libs-snapshot</name>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>interval:5</updatePolicy>
+            </snapshots>
+            <url>http://${mvn.repo}/nexus/libs-snapshot</url>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+
+        <pluginRepository>
+            <id>graduation-release</id>
+            <name>plugins-release</name>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <url>http://${mvn.repo}/nexus/plugins-release</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>graduation-snapshots</id>
+            <name>plugins-snapshot</name>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <url>http://${mvn.repo}/nexus/plugins-snapshot</url>
+        </pluginRepository>
+
+    </pluginRepositories>
+
+    <!-- release plugin needed -->
+    <!-- The developerConnection contains the URL of the Source Control Management system pointing to the folder containing this pom.xml -->
+    <scm>
+        <developerConnection>scm:svn:svn://192.168.102.20/landseaFrameworkWeb/7SourceCode/mcplatform/trunk/</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>graduation-release</id>
+            <name>libs-release</name>
+            <url>http://${mvn.repo}/nexus/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>graduation-snapshots</id>
+            <name>libs-snapshot</name>
+            <url>http://${mvn.repo}/nexus/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <finalName>graduation-framework</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <charset>UTF-8</charset>
+                        <encoding>UTF-8</encoding>
+                        <docencoding>UTF-8</docencoding>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <classifier>classes</classifier>
+                                <excludes>
+                                    <exclude>*.properties</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <!-- release:update-versions -DautoVersionSubmodules=true -->
+                    <!-- clean release:prepare -Darguments='-Dmaven.test.skip=true' -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <username>tech1</username>
+                        <password>123123</password>
+                        <checkModificationExcludes>
+                            <checkModificationExclude>**\*.iml</checkModificationExclude>
+                        </checkModificationExcludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>config-*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+    <modules>
+        <module>graduation-import</module>
+        <module>graduation-core</module>
+        <module>graduation-web</module>
+        <module>graduation-authentication</module>
+        <module>graduation-database</module>
+        <module>bus-manage</module>
+    </modules>
 
 </project>

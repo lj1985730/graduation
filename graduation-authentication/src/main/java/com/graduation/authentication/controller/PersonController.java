@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 2016-8-16 22:13:53
  */
 @Controller
-@RequestMapping(value = "**/system/authentication/person")
+@RequestMapping(value = "**/authentication/person")
 class PersonController extends BaseController {
 	
 	@Resource
@@ -35,9 +35,9 @@ class PersonController extends BaseController {
 	/**
 	 * 页面的首页
 	 */
-	@RequestMapping(value = { "/index" })
-	public String index() {
-		return pageView("/system/authentication/person");
+	@RequestMapping(value = { "/homeView" })
+	public String home() {
+		return pageView("/authentication/person");
 	}
 
 	/**

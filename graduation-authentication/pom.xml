@@ -19,16 +19,13 @@
         <finalName>graduation-authentication</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <!-- <archiveClasses>true</archiveClasses> -->
-                    <attachClasses>true</attachClasses>
-                </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -65,9 +62,16 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>graduation-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <artifactId>graduation-web</artifactId>
+            <version>${project.version}</version>
             <type>jar</type>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>graduation-web</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

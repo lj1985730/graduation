@@ -1,13 +1,13 @@
 package com.graduation.authentication.controller;
 
-import com.graduation.core.base.controller.BaseController;
-import com.graduation.core.base.dto.JsonResult;
-import com.graduation.core.base.service.BaseService;
-import com.graduation.core.base.util.WebUtil;
 import com.graduation.authentication.entity.Account;
 import com.graduation.authentication.service.AccountRoleService;
 import com.graduation.authentication.service.AccountService;
 import com.graduation.authentication.service.DepartmentService;
+import com.graduation.authentication.util.AuthenticationUtil;
+import com.graduation.core.base.controller.BaseController;
+import com.graduation.core.base.dto.JsonResult;
+import com.graduation.core.base.service.BaseService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
@@ -27,7 +27,7 @@ import java.util.Arrays;
  * @version 2016-8-14 23:29:36
  */
 @Controller
-@RequestMapping(value = "**/system/authentication/account")
+@RequestMapping(value = "**/authentication/account")
 class AccountController extends BaseController {
 	
 	@Resource
@@ -42,9 +42,9 @@ class AccountController extends BaseController {
 	/**
 	 * 页面的首页
 	 */
-	@RequestMapping(value = { "/index" })
-	public String index() {
-		return pageView("/system/authentication/account");
+	@RequestMapping(value = { "/homeView" })
+	public String home() {
+		return pageView("/authentication/account");
 	}
 
 	/**
@@ -101,7 +101,7 @@ class AccountController extends BaseController {
 	@RequestMapping(value = { "/currentName" })
 	@ResponseBody
 	public JsonResult searchCurrentName() {
-		return new JsonResult(WebUtil.getInfo(WebUtil.LoginInfo.PERSON_NAME));
+		return new JsonResult(AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.PERSON_NAME));
 	}
 
 	/**

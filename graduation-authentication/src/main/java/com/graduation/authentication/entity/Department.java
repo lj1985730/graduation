@@ -1,7 +1,6 @@
 package com.graduation.authentication.entity;
 
 import com.graduation.core.base.entity.TreeEntity;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -10,7 +9,7 @@ import javax.validation.constraints.Digits;
 /**
  * 权限-部门-实体
  * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @since v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_DEPARTMENT")
@@ -19,34 +18,34 @@ public class Department extends TreeEntity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 部门英文
+	 * 英文名称
 	 */
-	@Length(max = 500, message = "部门英文长度不能超过500")
+	@Length(max = 500, message = "英文名称长度不能超过500")
 	private String enName;
 
 	/**
 	 * 部门编码
 	 */
-	@Length(max = 500, message = "部门编码长度不能超过500")
+	@Length(max = 100, message = "部门编码长度不能超过100")
 	private String code;
 
 	/**
 	 * 部门简称
 	 */
-	@Length(max = 500, message = "部门简称长度不能超过500")
+	@Length(max = 100, message = "部门简称长度不能超过100")
 	private String shortName;
 
 	/**
 	 * 部门类型
 	 */
-	@Digits(integer = 2, fraction = 0, message = "部门类型长度不能超过2")
-	private Integer type;
+	@Length(max = 200, message = "部门类型长度不能超过200")
+	private String category;
 
 	/**
 	 * 联系人
 	 */
 	@Length(max = 500, message = "联系人长度不能超过500")
-	private String linkMan;
+	private String linkman;
 
 	/**
 	 * 传真
@@ -73,14 +72,9 @@ public class Department extends TreeEntity {
 	private Integer level;
 
 	/**
-	 * 是否使用
-	 */
-	private Boolean enabled;
-
-	/**
 	 * 备注
 	 */
-	@Length(max = 2000, message = "备注长度不能超过2000")
+	@Length(max = 1000, message = "备注长度不能超过1000")
 	private String remark;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -120,22 +114,23 @@ public class Department extends TreeEntity {
 		this.shortName = shortName;
 	}
 
-	@Column(name = "TYPE")
-	public Integer getType() {
-		return type;
+    @Column(name = "CATEGORY")
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+	@Column(name = "LINKMAN")
+	public String getLinkman() {
+		return linkman;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	@Column(name = "LINK_MAN")
-	public String getLinkMan() {
-		return linkMan;
-	}
-
-	public void setLinkMan(String linkMan) {
-		this.linkMan = linkMan;
+	public void setLinkman(String linkman) {
+		this.linkman = linkman;
 	}
 
 	@Column(name = "FAX")
@@ -172,16 +167,6 @@ public class Department extends TreeEntity {
 
 	public void setLevel(Integer level) {
 		this.level = level;
-	}
-
-	@Column(name = "ENABLED")
-	@Type(type = "yes_no")
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	@Column(name = "REMARK")

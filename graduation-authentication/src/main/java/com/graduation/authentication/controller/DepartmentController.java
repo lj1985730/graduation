@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "**/system/authentication/department")
+@RequestMapping(value = "**/authentication/department")
 class DepartmentController extends BaseController {
 
 	@Resource
@@ -24,9 +24,9 @@ class DepartmentController extends BaseController {
 	/**
 	 * 页面的首页
 	 */
-	@RequestMapping(value = { "/index" })
-	public String index() {
-		return pageView("/system/authentication/department");
+	@RequestMapping(value = { "/homeView" })
+	public String home() {
+		return pageView("/authentication/department");
 	}
 	
 	/**

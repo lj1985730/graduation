@@ -2,13 +2,10 @@ package com.graduation.authentication.controller;
 
 import com.graduation.authentication.entity.Account;
 import com.graduation.authentication.service.AccountService;
-import com.graduation.core.base.controller.BaseController;
-import com.graduation.core.base.dao.RedisDao;
-import com.graduation.core.base.dto.JsonResult;
-import com.graduation.core.base.util.TokenUtil;
-import com.graduation.core.base.util.WebUtil;
 import com.graduation.authentication.service.LoginService;
 import com.graduation.authentication.service.MenuService;
+import com.graduation.core.base.controller.BaseController;
+import com.graduation.core.base.dto.JsonResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,27 +37,17 @@ class LoginController extends BaseController {
 	@Resource
 	private MenuService menuService;
 
-	@Resource
-	private RedisDao redisDao;
-
 	@RequestMapping(value = { "/" })
 	public String index() {
-		return redirectPageView("/login");
+		return redirectPageView("/loginView");
 	}
 
 	/**
 	 * 登录页
 	 */
-	@RequestMapping(value = { "/login" })
-	public ModelAndView index(HttpServletRequest request) {
-		//试图检索cookie中的登录信息，如果存在，自动赋值登陆页的账户密码内容
+	@RequestMapping(value = { "/loginView" })
+	public ModelAndView loginView() {
 		Account account = new Account();
-		if(TokenUtil.tokenExist(request)) {
-			String loginName = WebUtil.getAccountName();
-			if(!StringUtils.isBlank(loginName)) {
-				account.setName(loginName);
-			}
-		}
 		return pageView("/login", "account", account);
 	}
 
@@ -90,22 +77,10 @@ class LoginController extends BaseController {
 		//login step 3: book login info.
 		service.bookLoginInfo(account);	//写入用户信息、权限信息
 
-		//login step 4: generate token.
-		String token = TokenUtil.setClientToken(request, response);	//生成token，并写入request和response
-
-		//login step 7: save login info.
-//		String rememberMe = userMap.get("rememberMe");	//是否勾选了“记住密码”
-//		Boolean remember = StringUtils.isEmpty(rememberMe) ? false : Boolean.valueOf(rememberMe);
-//		if(remember) {	//选择了记住密码，时限默认7天
-//			redisDao.setHashAll(token, map, TokenUtil.EXPIRE_SECOND);
-//		} else {	//否则不设置过期时间
-//			redisDao.setHashAll(token, map);
-//		}
-
 		account.setLastLogon(account.getLastModifyTime());
 		accountService.update(account);
 
-		return new JsonResult(true, "登录成功！").setData(token);
+		return new JsonResult(true, "登录成功！");
 	}
 
 	/**
@@ -146,7 +121,7 @@ class LoginController extends BaseController {
 	/**
 	 * 主页
 	 */
-	@RequestMapping(value = { "/home" })
+	@RequestMapping(value = { "/homeView" })
 	public String home() {
 		return pageView("/index");
 	}
@@ -160,7 +135,7 @@ class LoginController extends BaseController {
 
         request.getSession().invalidate();	//清除session
 
-		return redirectPageView("/login");
+		return redirectPageView("/loginView");
 	}
 
 	@RequestMapping(value = { "/top" })

@@ -20,7 +20,7 @@ import java.util.Map;
  * @version 2016-9-22 21:39:42
  */
 @Controller
-@RequestMapping(value="**/system/authentication/module")
+@RequestMapping(value="**/authentication/module")
 class ModuleController extends BaseController {
 
 	@Resource

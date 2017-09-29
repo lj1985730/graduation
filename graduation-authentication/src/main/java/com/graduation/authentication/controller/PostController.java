@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 2016-8-14 23:29:36
  */
 @Controller
-@RequestMapping(value = "**/system/authentication/post")
+@RequestMapping(value = "**/authentication/post")
 class PostController extends BaseController {
 	
 	@Resource
@@ -29,9 +29,9 @@ class PostController extends BaseController {
     /**
      * 页面的首页
      */
-    @RequestMapping(value = { "/index" })
-    public String index() {
-        return pageView("/system/authentication/post");
+    @RequestMapping(value = { "/homeView" })
+    public String home() {
+        return pageView("/authentication/post");
     }
 
     /**
