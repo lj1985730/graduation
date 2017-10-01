@@ -1,4 +1,4 @@
-package com.graduation.core.common.entity;
+package com.graduation.core.system.entity;
 
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
@@ -46,7 +46,7 @@ public class SystemDict extends BaseEntity {
 	 * 排序
 	 */
 	@NotNull(message = "排序不能为空")
-	@Digits(integer = 5, fraction = 0, message = "排序长度不能超过(5,0)")
+	@Digits(integer = 9, fraction = 0, message = "排序长度不能超过(9,0)")
 	private Integer sort;
 
 	/**
@@ -82,7 +82,7 @@ public class SystemDict extends BaseEntity {
 		this.category = category;
 	}
 
-	@Column(name = "SORT_NUM")
+	@Column(name = "SORT_NUMBER")
 	public Integer getSort() {
 		return sort;
 	}

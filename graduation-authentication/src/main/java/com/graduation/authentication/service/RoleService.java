@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +20,6 @@ import java.util.Map;
 @Service
 @Transactional
 public class RoleService extends BaseService<Role> {
-	
-	@Resource
-	private RoleButtonService roleBtnService;
-	
-	@Resource
-	private RoleMenuService roleMenuService;
 
 	/**
 	 * 不分页查询btn表

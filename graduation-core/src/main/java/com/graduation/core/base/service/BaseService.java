@@ -35,6 +35,11 @@ public abstract class BaseService<E extends BaseEntity> {
 	 * 删除字段属性名
 	 */
 	public static final String DELETE_PARAM = "deleted";
+
+	/**
+	 * 排序号字段属性名
+	 */
+	public static final String SORT_PARAM = "sort";
 	
 	/**
 	 * 统一注入DAO层

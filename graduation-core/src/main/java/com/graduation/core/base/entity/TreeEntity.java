@@ -18,7 +18,7 @@ public class TreeEntity extends BaseEntity {
      * 名称，树形显示内容
      */
     @NotBlank(message = "名称不可为空")
-    @Length(max = 500, message = "名称长度不可大于500")
+    @Length(max = 200, message = "名称长度不可大于200")
     private String name;
 
 	/**
@@ -63,7 +63,7 @@ public class TreeEntity extends BaseEntity {
 		this.parentId = parentId;
 	}
 
-	@Column(name = "SORT_NUM")
+	@Column(name = "SORT_NUMBER")
 	public Integer getSort() {
 		return sort;
 	}

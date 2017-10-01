@@ -1,11 +1,12 @@
 package com.graduation.authentication.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.graduation.core.base.entity.BaseEntity;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 权限-人员岗位关系-实体
@@ -36,6 +37,7 @@ public class PersonPost extends BaseEntity {
     @Length(max = 36, message = "岗位ID长度不能超过36")
     private String postId;
 
+    @NotFound(action = NotFoundAction.EXCEPTION)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false, referencedColumnName = "ID")
     public Person getPerson() {
@@ -55,9 +57,9 @@ public class PersonPost extends BaseEntity {
         this.personId = personId;
     }
 
+    @NotFound(action = NotFoundAction.EXCEPTION)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "POST_ID", insertable = false, updatable = false, referencedColumnName = "ID")
-    @JsonIgnore
     public Post getPost() {
         return post;
     }
@@ -66,7 +68,7 @@ public class PersonPost extends BaseEntity {
         this.post = post;
     }
 
-    @Column(name = "POST_ID", columnDefinition = "char(1)")
+    @Column(name = "POST_ID")
     public String getPostId() {
         return postId;
     }

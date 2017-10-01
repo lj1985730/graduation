@@ -1,7 +1,7 @@
 package com.graduation.authentication.controller;
 
 import com.graduation.authentication.entity.Menu;
-import com.graduation.authentication.service.ModuleService;
+import com.graduation.authentication.service.QuickMenuService;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import java.util.Map;
 class ModuleController extends BaseController {
 
 	@Resource
-	private ModuleService service;
+	private QuickMenuService service;
 
 	/**
 	 * 获取全部快捷菜单
@@ -38,7 +38,7 @@ class ModuleController extends BaseController {
 		Map<String, List<Menu>> resMap = new HashMap<>();
 		
 		//加入上次访问结果集
-		resMap.put("last", service.getLastMenu(request));
+//		resMap.put("last", service.getLastMenu(request));
 		
 		//加入快速访问结果集
 		resMap.put("quick", service.getQuickMenu());

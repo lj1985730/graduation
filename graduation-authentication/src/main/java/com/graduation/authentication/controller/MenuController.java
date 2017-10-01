@@ -3,11 +3,11 @@ package com.graduation.authentication.controller;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.graduation.authentication.entity.Menu;
+import com.graduation.authentication.service.MenuService;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.BaseService;
-import com.graduation.authentication.service.MenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -72,7 +72,7 @@ class MenuController extends BaseController {
                 generator.writeStringField("name", menu.getName());
                 generator.writeStringField("icon", menu.getIcon());
                 generator.writeBooleanField("leaf", false);
-                generator.writeStringField("url", menu.getUrl());
+                generator.writeStringField("url", menu.getUri());
                 generator.writeFieldName("children");
                 generator.writeStartArray();
 
@@ -89,7 +89,7 @@ class MenuController extends BaseController {
                     generator.writeStringField("name", subMenu.getName());
                     generator.writeStringField("icon", subMenu.getIcon());
                     generator.writeBooleanField("leaf", true);
-                    generator.writeStringField("url", subMenu.getUrl());
+                    generator.writeStringField("url", subMenu.getUri());
                     generator.writeEndObject();
                 }
                 generator.writeEndArray();

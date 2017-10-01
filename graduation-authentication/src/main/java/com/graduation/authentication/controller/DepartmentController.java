@@ -1,11 +1,11 @@
 package com.graduation.authentication.controller;
 
 
+import com.graduation.authentication.entity.Department;
+import com.graduation.authentication.service.DepartmentService;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.core.base.service.BaseService;
-import com.graduation.authentication.entity.Department;
-import com.graduation.authentication.service.DepartmentService;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
@@ -47,9 +47,9 @@ class DepartmentController extends BaseController {
 
 		Department department = new Department();
 		department.setId(null);
-		department.setName("总医院");
+		department.setName("总部");
 		department.setParentId("#");
-		department.setSortNo(0);
+		department.setSort(0);
 		department.setLevel(0);
 		list.add(department);
 		return new JsonResult(list);

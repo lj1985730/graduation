@@ -30,8 +30,8 @@ public class PersonService extends BaseService<Person> {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Person.class);
 		// 构造条件
 		criteria.add(Restrictions.disjunction()
-				.add(Restrictions.eq("idNo", person.getIdNo()))	//身份证号相同，或者姓名与出生日期均相同
-				.add(Restrictions.or(Restrictions.eq("name", person.getName()), Restrictions.eq("birthday", person.getBirthday()))));
+				.add(Restrictions.eq("idNumber", person.getIdNumber()))	//身份证号相同，或者姓名与出生日期均相同
+				.add(Restrictions.or(Restrictions.eq("name", person.getName()), Restrictions.eq("birthDate", person.getBirthDate()))));
 		criteria.add(Restrictions.eq(DELETE_PARAM, false));
 		if(StringUtils.isBlank(person.getId())) {
 			criteria.add(Restrictions.ne("id", person.getId()));

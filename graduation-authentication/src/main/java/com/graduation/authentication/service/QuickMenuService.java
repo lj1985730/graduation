@@ -1,19 +1,15 @@
 package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.Menu;
-import com.graduation.authentication.entity.Module;
+import com.graduation.authentication.entity.QuickMenu;
 import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.service.BaseService;
-import com.graduation.web.util.CookieUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,42 +17,12 @@ import java.util.Map;
 
 /**
  * 权限-用户便捷菜单-业务层
- * @author liujun
- * @since 2016-3-4 11:10:59
+ * @author liujun at 2016-3-4 11:10:59
+ * @version v1.0.0
  */
 @Service
 @Transactional
-public class ModuleService extends BaseService<Module> {
-	
-	/**
-	 * 获取上次访问记录
-	 * @param request 请求体
-	 * @return 上次访问记录列表
-	 */
-	public List<Menu> getLastMenu(HttpServletRequest request) {
-		//上次访问记录列表
-		List<Menu> lastMenuList = new ArrayList<>();
-		
-		//取上次访问页面
-		Cookie lastMenuCookie = CookieUtil.getCookie(request, (CookieUtil.COOKIE_LAST_MENU_KEY));
-		if(lastMenuCookie != null && !StringUtils.isBlank(lastMenuCookie.getValue())) {
-			DetachedCriteria lastCriteria = DetachedCriteria.forClass(Menu.class);
-			lastCriteria.add(Restrictions.eq(BaseService.DELETE_PARAM, false));
-			lastCriteria.add(Restrictions.eq("id", lastMenuCookie.getValue()));
-			lastMenuList = this.searchByCriteria(lastCriteria);
-		}
-		
-		//没有上一次访问记录，占位
-		if(lastMenuList.size() == 0) {
-			Menu menu = new Menu();
-			menu.setName("无上次记录");
-			menu.setUrl("home");
-			menu.setId("00000000-0000-0000-0000-000000000000");
-			lastMenuList.add(menu);
-		}
-		
-		return lastMenuList;
-	}
+public class QuickMenuService extends BaseService<QuickMenu> {
 
 	/**
 	 * 获取快速访问菜单
@@ -66,7 +32,7 @@ public class ModuleService extends BaseService<Module> {
 		//结果列表
 		List<Menu> quickMenuList = new ArrayList<>();
 		
-		List<Module> quickModules = this.getQuickModule();
+		List<QuickMenu> quickModules = this.getQuickMenuModel();
 		
 		//将快速访问页面加入队列
 		quickModules.forEach(quickModule -> quickMenuList.add(quickModule.getMenu()));
@@ -78,9 +44,9 @@ public class ModuleService extends BaseService<Module> {
 	 * 获取快速访问菜单（关系对象）
 	 * @return 快速访问菜单（关系对象）
 	 */
-	public List<Module> getQuickModule() {
+	public List<QuickMenu> getQuickMenuModel() {
 		//取快速访问页面
-		DetachedCriteria criteria = DetachedCriteria.forClass(Module.class);
+		DetachedCriteria criteria = DetachedCriteria.forClass(QuickMenu.class);
 		criteria.add(Restrictions.eq(DELETE_PARAM, false));
 		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.addOrder(Order.desc("lastModifyTime"));	//默认操作时间倒序
@@ -97,20 +63,20 @@ public class ModuleService extends BaseService<Module> {
 			return;
 		}
 		//取旧数据
-		List<Module> oldModules = this.getQuickModule();
+		List<QuickMenu> oldQuickMenus = this.getQuickMenuModel();
 		//删除全部旧数据
-		if(oldModules != null && !oldModules.isEmpty()) {
-			oldModules.forEach(oldModule -> {
-				super.destroy(oldModule.getId());	//物理删除
+		if(oldQuickMenus != null && !oldQuickMenus.isEmpty()) {
+			oldQuickMenus.forEach(oldQuickMenu -> {
+				super.destroy(oldQuickMenu.getId());	//物理删除
 			});
 		}
 
 		//新增数据
-		Module module;
+		QuickMenu quickMenu;
 		for (String menuId : menuIds) {
-			module = new Module();
-			module.setMenuId(menuId);
-			this.create(module);
+			quickMenu = new QuickMenu();
+			quickMenu.setMenuId(menuId);
+			this.create(quickMenu);
 		}
 	}
 	
@@ -118,10 +84,10 @@ public class ModuleService extends BaseService<Module> {
 	 * 删除快捷菜单，物理删除
 	 */
 	public void delete(Serializable id) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Module.class);
+		DetachedCriteria criteria = DetachedCriteria.forClass(QuickMenu.class);
 		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.add(Restrictions.eq("menuId", id));
-		List<Module> quickModules = this.searchByCriteria(criteria);
+		List<QuickMenu> quickModules = this.searchByCriteria(criteria);
 
 		quickModules.forEach(quickModule -> {
 			super.destroy(quickModule.getId());	//物理删除
@@ -134,13 +100,13 @@ public class ModuleService extends BaseService<Module> {
 	}
 
 	@Override
-	public void beforeCreate(Module entity) {
+	public void beforeCreate(QuickMenu entity) {
 		entity.setAccountId(AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString());
 	}
 
 	@Override
-	public void beforeDelete(Module entity) {}
+	public void beforeDelete(QuickMenu entity) {}
 
 	@Override
-	public void beforeUpdate(Module entity) {}
+	public void beforeUpdate(QuickMenu entity) {}
 }

@@ -1,4 +1,4 @@
-package com.graduation.core.common.entity;
+package com.graduation.core.system.entity;
 
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.annotations.Type;
@@ -23,7 +23,7 @@ public class SystemConfig extends BaseEntity {
 	 * 配置键
 	 */
 	@NotBlank(message = "配置键不能为空")
-	@Length(max = 500, message = "'配置键'长度不能超过500")
+	@Length(max = 200, message = "'配置键'长度不能超过200")
 	private String key;
 
 	/**
@@ -50,7 +50,7 @@ public class SystemConfig extends BaseEntity {
 	@Length(max = 1000, message = "备注长度不能超过1000")
 	private String remark;
 
-    @Column(name = "KEY")
+    @Column(name = "CFG_KEY")
     public String getKey() {
         return key;
     }
@@ -59,7 +59,7 @@ public class SystemConfig extends BaseEntity {
         this.key = key;
     }
 
-    @Column(name = "VALUE")
+    @Column(name = "CFG_VALUE")
     public String getValue() {
         return value;
     }

@@ -1,10 +1,10 @@
-package com.graduation.authentication.base.controller;
+package com.graduation.core.system.controller;
 
-import com.graduation.authentication.base.entity.SysConfig;
-import com.graduation.authentication.base.service.SysConfigService;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.core.base.service.BaseService;
+import com.graduation.core.system.entity.SystemConfig;
+import com.graduation.core.system.service.SystemConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping(value = "**/system/base/sysConfig")
-class SysConfigController extends BaseController {
+class SystemConfigController extends BaseController {
 	
 	@Resource
-	private SysConfigService service;
+	private SystemConfigService service;
 
     /**
      * 页面的首页
@@ -47,7 +47,7 @@ class SysConfigController extends BaseController {
         int offset = Integer.parseInt(request.getParameter("offset"));	//获取分页信息
         int limit = Integer.parseInt(request.getParameter("limit"));
 
-        DetachedCriteria criteria = DetachedCriteria.forClass(SysConfig.class);//构造DetachedCriteria对象
+        DetachedCriteria criteria = DetachedCriteria.forClass(SystemConfig.class);//构造DetachedCriteria对象
 
         criteria.add(Restrictions.eq(BaseService.DELETE_PARAM, false));
 
@@ -74,7 +74,7 @@ class SysConfigController extends BaseController {
      */
     @RequestMapping(value = { "/" }, method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult create(@RequestBody SysConfig config) {
+    public JsonResult create(@RequestBody SystemConfig config) {
         service.create(config);
         return new JsonResult(JsonResult.CREATE_SUCCEED);
     }
@@ -85,7 +85,7 @@ class SysConfigController extends BaseController {
      */
     @RequestMapping(value = { "/" }, method = RequestMethod.PUT)
     @ResponseBody
-    public JsonResult modify(@RequestBody SysConfig config) {
+    public JsonResult modify(@RequestBody SystemConfig config) {
         service.update(config);
         return new JsonResult(JsonResult.UPDATE_SUCCEED);
     }

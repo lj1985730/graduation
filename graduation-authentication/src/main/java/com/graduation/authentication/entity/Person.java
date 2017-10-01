@@ -4,16 +4,16 @@ import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
  * 权限-人员-实体
- * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @author Liu Jun at 2016-7-31 14:14:44
+ * @since v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_PERSON")
@@ -120,13 +120,13 @@ public class Person extends BaseEntity {
 	 * 姓名
 	 */
 	@NotBlank(message = "姓名不能为空")
-	@Length(max = 50, message = "姓名长度不能超过50")
+	@Length(max = 100, message = "姓名长度不能超过100")
 	private String name;
 
 	/**
 	 * 英文名
 	 */
-	@Length(max = 500, message = "英文名长度不能超过500")
+	@Length(max = 100, message = "英文名长度不能超过100")
 	private String enName;
 
 	/**
@@ -137,63 +137,62 @@ public class Person extends BaseEntity {
 	private Gender gender;
 
 	/**
-	 * 证件类型1.身份证2.驾照3.护照
-	 */
-	@NotNull(message = "证件类型不可为空")
-	@Enumerated(value = EnumType.STRING)
-	private IdType idType;
-
-	/**
 	 * 证件号
 	 */
-	@Length(max = 200, message = "证件号长度不能超过200")
-	private String idNo;
+	@Length(max = 100, message = "证件号长度不能超过100")
+	private String idNumber;
 	
 	/**
 	 * 国籍
 	 */
-	@Length(max = 50, message = "国籍长度不能超过50")
+	@Length(max = 100, message = "国籍长度不能超过100")
 	private String country;
 	
 	/**
 	 * 民族
 	 */
-	@Length(max = 50, message = "民族长度不能超过50")
+	@Length(max = 100, message = "民族长度不能超过100")
 	private String nationality;
 
 	/**
-	 * 生日
+	 * 出生地
 	 */
-	private LocalDate birthday;
+	@Length(max = 100, message = "出生地长度不能超过100")
+	private String birthPlace;
+
+	/**
+	 * 出生日期
+	 */
+	private LocalDate birthDate;
 
 	/**
 	 * 手机号码
 	 */
-	@Length(max = 30, message = "手机号码长度不能超过30")
-	private String mobileNo;
+	@Length(max = 100, message = "手机号码长度不能超过100")
+	private String mobileNumber;
 
 	/**
 	 * 办公号码
 	 */
-	@Length(max = 100, message = "办公号码长度不能超过500")
-	private String officeNo;
+	@Length(max = 100, message = "办公号码长度不能超过100")
+	private String officeNumber;
 
 	/**
 	 * 邮箱
 	 */
-	@Length(max = 200, message = "邮箱长度不能超过200")
+	@Length(max = 100, message = "邮箱长度不能超过100")
 	private String email;
 
 	/**
 	 * 家庭住址
 	 */
-	@Length(max = 500, message = "家庭住址长度不能超过500")
+	@Length(max = 100, message = "家庭住址长度不能超过100")
 	private String address;
 
 	/**
 	 * 备注
 	 */
-	@Length(max = 2000, message = "备注长度不能超过2000")
+	@Length(max = 1000, message = "备注长度不能超过2000")
 	private String remark;
 
 	/**
@@ -227,16 +226,6 @@ public class Person extends BaseEntity {
 	 */
 	private String departmentId;
 
-	/**
-	 * 岗位
-	 */
-	private Post post;
-
-	/**
-	 * 岗位ID
-	 */
-	private String postId;
-
 	@Column(name = "NAME")
 	public String getName() {
 		return name;
@@ -264,22 +253,13 @@ public class Person extends BaseEntity {
 		this.gender = gender;
 	}
 
-	@Column(name = "ID_TYPE")
-	public IdType getIdType() {
-		return idType;
+	@Column(name = "ID_NUMBER")
+	public String getIdNumber() {
+		return idNumber;
 	}
 
-	public void setIdType(IdType idType) {
-		this.idType = idType;
-	}
-
-	@Column(name = "ID_NO")
-	public String getIdNo() {
-		return idNo;
-	}
-
-	public void setIdNo(String idNo) {
-		this.idNo = idNo;
+	public void setIdNumber(String idNumber) {
+		this.idNumber = idNumber;
 	}
 
 	@Column(name = "COUNTRY")
@@ -300,32 +280,42 @@ public class Person extends BaseEntity {
 		this.nationality = nationality;
 	}
 
-	@Column(name = "BIRTHDAY")
-	public LocalDate getBirthday() {
-		return birthday;
+	@Column(name = "BIRTH_PLACE")
+	public String getBirthPlace() {
+		return birthPlace;
 	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
 	}
 
-	@Column(name = "MOBILE_NO")
-	public String getMobileNo() {
-		return mobileNo;
+	@Column(name = "BIRTH_DATE")
+	public LocalDate getBirthDate() {
+		return birthDate;
 	}
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	@Column(name = "OFFICE_NO")
-	public String getOfficeNo() {
-		return officeNo;
+	@Column(name = "MOBILE_NUMBER")
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setOfficeNo(String officeNo) {
-		this.officeNo = officeNo;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
+
+	@Column(name = "OFFICE_NUMBER")
+	public String getOfficeNumber() {
+		return officeNumber;
+	}
+
+	public void setOfficeNumber(String officeNumber) {
+		this.officeNumber = officeNumber;
+	}
+
 
 	@Column(name = "EMAIL")
 	public String getEmail() {
@@ -363,7 +353,7 @@ public class Person extends BaseEntity {
 		this.state = state;
 	}
 
-	@Column(name = "CATEGROY")
+	@Column(name = "CATEGORY")
 	public Category getCategory() {
 		return category;
 	}
@@ -399,25 +389,5 @@ public class Person extends BaseEntity {
 
 	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POST_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-	@NotFound(action = NotFoundAction.IGNORE)
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
-
-	@Column(name = "POST_ID")
-	public String getPostId() {
-		return postId;
-	}
-
-	public void setPostId(String postId) {
-		this.postId = postId;
 	}
 }

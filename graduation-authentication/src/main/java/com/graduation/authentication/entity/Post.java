@@ -5,9 +5,9 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 权限-岗位-实体
@@ -21,18 +21,18 @@ public class Post extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
     /**
-     * 岗位编码
-     **/
-    @Length(max = 500, message = "岗位编码长度不能超过500")
-    private String code;
-
-    /**
      * 岗位名称
      **/
     @NotBlank(message = "岗位名称不能为空")
-    @Length(max = 500, message = "岗位名称长度不能超过500")
+    @Length(max = 100, message = "岗位名称长度不能超过100")
     private String name;
-    
+
+    /**
+     * 岗位编码
+     **/
+    @Length(max = 100, message = "岗位编码长度不能超过100")
+    private String code;
+
     /**
      * 是否部门长
      **/
@@ -50,14 +50,11 @@ public class Post extends BaseEntity {
     @Length(max = 36, message = "部门ID长度不能超过36")
     private String departmentId;
 
-    @Column(name = "CODE")
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+    /**
+     * 备注
+     */
+    @Length(max = 1000, message = "备注长度不能超过1000")
+    private String remark;
 
     @Column(name = "NAME")
     public String getName() {
@@ -68,8 +65,18 @@ public class Post extends BaseEntity {
         this.name = name;
     }
 
+    @Column(name = "CODE")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Column(name = "IS_LEADER")
     @Type(type = "yes_no")
+
     public Boolean getIsLeader() {
 		return isLeader;
 	}
@@ -96,5 +103,14 @@ public class Post extends BaseEntity {
 
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
+    }
+
+    @Column(name = "REMARK")
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -44,7 +44,7 @@ public abstract class TreeService<E extends TreeEntity> extends BaseService<E> {
 
         for (String supMenuId : supObjIds) {
             E entity = dao.get(entityClass, supMenuId);
-            entity.setEnabled(enable);
+            entity.setEnable(enable);
             this.update(entity);
         }
     }
@@ -92,7 +92,7 @@ public abstract class TreeService<E extends TreeEntity> extends BaseService<E> {
             return null;
         }
         DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
-        criteria.add(Restrictions.in("parentId", parentIds));
+        criteria.add(Restrictions.in("parentId", (Object[]) parentIds));
         criteria.add(Restrictions.eq(DELETE_PARAM, false));
         List<E> subList = dao.criteriaQuery(criteria);
         return (subList == null || subList.isEmpty()) ? null : subList;

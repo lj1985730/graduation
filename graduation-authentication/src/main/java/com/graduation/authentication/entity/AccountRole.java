@@ -1,15 +1,17 @@
 package com.graduation.authentication.entity;
 
 import com.graduation.core.base.entity.BaseEntity;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 权限-账户角色关系-实体
- * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @author Liu Jun at 2016-7-31 14:14:44
+ * @version v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_ACCOUNT_ROLE")
@@ -41,6 +43,7 @@ public class AccountRole extends BaseEntity {
 	@Length(max = 36, message = "角色ID长度不能超过36")
 	private String roleId;
 
+	@NotFound(action = NotFoundAction.EXCEPTION)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	public Account getAccount() {
@@ -60,6 +63,7 @@ public class AccountRole extends BaseEntity {
 		this.accountId = accountId;
 	}
 
+	@NotFound(action = NotFoundAction.EXCEPTION)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	public Role getRole() {

@@ -4,18 +4,18 @@ import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
- * 权限-用户便捷菜单-实体
- * @author Liu Jun
- * @version 2016-9-22 21:30:45
+ * 权限-账号快速菜单表-实体
+ * @author Liu Jun at 2016-9-22 21:30:45
+ * @since v1.0.0
  */
 @Entity
-@Table(name = "T_AUTH_MODULE")
-public class Module extends BaseEntity {
+@Table(name = "T_AUTH_QUICK_MODULE")
+public class QuickMenu extends BaseEntity {
 	public static final long serialVersionUID = 1L;
 
 	/**
@@ -42,9 +42,9 @@ public class Module extends BaseEntity {
 	@Length(max = 36, message = "关联菜单Id长度不能超过36!")
 	private String menuId;
 
-	@ManyToOne
-	@JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	@NotFound(action = NotFoundAction.EXCEPTION)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	public Account getAccount() {
 		return account;
 	}
@@ -61,10 +61,10 @@ public class Module extends BaseEntity {
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name = "MENU_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+
 	@NotFound(action = NotFoundAction.EXCEPTION)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "MENU_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	public Menu getMenu() {
 		return menu;
 	}

@@ -3,10 +3,9 @@ package com.graduation.authentication.entity;
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 权限-按钮-实体
@@ -35,20 +34,14 @@ public class Button extends BaseEntity {
      * 按钮名称
      */
     @NotBlank(message = "按钮名称不能为空")
-    @Length(max = 50, message = "按钮名称长度不能超过50")
+    @Length(max = 100, message = "按钮名称长度不能超过100")
     private String name;
 
     /**
      * 按钮样式
      */
-    @Length(max = 50, message = "按钮图标长度不能超过50")
+    @Length(max = 100, message = "按钮图标长度不能超过100")
     private String icon;
-
-    /**
-     * 按钮类型
-     */
-    @Digits(integer = 1, fraction = 0, message = "按钮类型长度不能超过1")
-    private Integer type;
 
     /**
      * 是否使用
@@ -59,7 +52,7 @@ public class Button extends BaseEntity {
     /**
      * 备注
      */
-    @Length(max = 2000, message = "备注长度不能超过2000")
+    @Length(max = 1000, message = "备注长度不能超过1000")
     private String remark;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -97,15 +90,6 @@ public class Button extends BaseEntity {
 
     public void setIcon(String icon) {
         this.icon = icon;
-    }
-
-    @Column(name = "TYPE")
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     @Column(name = "ENABLED")

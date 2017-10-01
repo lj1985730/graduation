@@ -1,16 +1,18 @@
 package com.graduation.authentication.entity;
 
 import com.graduation.core.base.entity.BaseEntity;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
  * 权限-角色按钮关系-实体
- * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @author Liu Jun at 2016-7-31 14:14:44
+ * @since v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_ROLE_BUTTON")
@@ -38,12 +40,6 @@ public class RoleButton extends BaseEntity {
     @Length(max = 36, message = "按钮ID长度不能超过36")
     private String buttonId;
 
-    /**
-     * 备注
-     */
-    @Length(max = 1000, message = "备注长度不能超过1000")
-    private String remark;
-
     @Column(name = "ROLE_ID")
     public String getRoleId() {
 		return roleId;
@@ -53,6 +49,7 @@ public class RoleButton extends BaseEntity {
 		this.roleId = roleId;
 	}
 
+	@NotFound(action = NotFoundAction.EXCEPTION)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUTTON_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	public Button getButton() {
@@ -70,14 +67,5 @@ public class RoleButton extends BaseEntity {
 
 	public void setButtonId(String buttonId) {
 		this.buttonId = buttonId;
-	}
-
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 }

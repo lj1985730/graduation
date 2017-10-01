@@ -20,7 +20,7 @@ public class Department extends TreeEntity {
 	/**
 	 * 英文名称
 	 */
-	@Length(max = 500, message = "英文名称长度不能超过500")
+	@Length(max = 100, message = "英文名称长度不能超过100")
 	private String enName;
 
 	/**
@@ -44,25 +44,25 @@ public class Department extends TreeEntity {
 	/**
 	 * 联系人
 	 */
-	@Length(max = 500, message = "联系人长度不能超过500")
+	@Length(max = 100, message = "联系人长度不能超过100")
 	private String linkman;
 
 	/**
 	 * 传真
 	 */
-	@Length(max = 500, message = "传真长度不能超过500")
+	@Length(max = 100, message = "传真长度不能超过100")
 	private String fax;
 
 	/**
 	 * 电话
 	 */
-	@Length(max = 500, message = "电话长度不能超过500")
-	private String telephone;
+	@Length(max = 100, message = "电话长度不能超过100")
+	private String phoneNumber;
 
 	/**
 	 * 电子邮件
 	 */
-	@Length(max = 500, message = "电子邮件长度不能超过500")
+	@Length(max = 100, message = "电子邮件长度不能超过100")
 	private String email;
 
 	/**
@@ -142,13 +142,13 @@ public class Department extends TreeEntity {
 		this.fax = fax;
 	}
 
-	@Column(name = "TELEPHONE")
-	public String getTelephone() {
-		return telephone;
+	@Column(name = "PHONE_NUMBER")
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	@Column(name = "EMAIL")

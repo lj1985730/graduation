@@ -33,13 +33,6 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>import-spring</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>import-security</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
@@ -57,8 +50,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>graduation-core</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+            <classifier>classes</classifier>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -66,12 +63,7 @@
             <version>${project.version}</version>
             <type>jar</type>
             <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>graduation-web</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

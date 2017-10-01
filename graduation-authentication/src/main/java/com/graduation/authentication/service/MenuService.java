@@ -4,6 +4,7 @@ import com.graduation.authentication.entity.*;
 import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.TreeService;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,56 +65,72 @@ public class MenuService extends TreeService<Menu> {
 	
 	/**
 	 * 获取企业下全部前台菜单——管理员登录前台时加载菜单使用
-	 * @param system 系统
+	 * @param systemId 系统ID
 	 * @return 全部前台菜单
 	 */
-	public List<Menu> getAllFrontMenu(Menu.SystemType system) {
-		return getAllMenu(system, true);
+	public List<Menu> getAllFrontMenu(String systemId) {
+		return getAllMenu(systemId, true);
 	}
 	
 	/**
 	 * 获取企业下全部后台菜单，管理员登录前台时加载菜单使用
-	 * @param system 系统
+	 * @param systemId 系统ID
 	 * @return 全部后台菜单
 	 */
-	public List<Menu> getAllBackMenu(Menu.SystemType system) {
-		return getAllMenu(system, false);
+	public List<Menu> getAllBackMenu(String systemId) {
+		return getAllMenu(systemId, false);
 	}
 	
 	/**
-	 * 获取企业下全部菜单
-	 * @param system 系统
+	 * 获取系统下全部菜单
+	 * @param systemId 系统ID
 	 * @param isPublic	true 前台；false 后台
 	 * @return 全部企业菜单
 	 */
-	private List<Menu> getAllMenu(Menu.SystemType system, Boolean isPublic) {
-		DetachedCriteria menuCriteria = DetachedCriteria.forClass(Menu.class);	//菜单查询
-		menuCriteria.add(Restrictions.eq(DELETE_PARAM, false));
+	private List<Menu> getAllMenu(String systemId, Boolean isPublic) {
+		DetachedCriteria systemMenuCriteria = DetachedCriteria.forClass(SystemMenu.class);	//菜单查询
+		systemMenuCriteria.createAlias("system", "system");
+		systemMenuCriteria.createAlias("menu", "menu");
+		systemMenuCriteria.add(Restrictions.eq(DELETE_PARAM, false));
+		systemMenuCriteria.add(Restrictions.eq("system." + DELETE_PARAM, false));
+		systemMenuCriteria.add(Restrictions.eq("menu." + DELETE_PARAM, false));
 		if(isPublic) {	//前台或后台
-			menuCriteria.add(Restrictions.in("isPublic", 0, 1));
+			systemMenuCriteria.add(Restrictions.in("menu.isPublic", 0, 1));
 		} else {
-			menuCriteria.add(Restrictions.in("isPublic", 0, 2));
+			systemMenuCriteria.add(Restrictions.in("menu.isPublic", 0, 2));
 		}
-		menuCriteria.add(Restrictions.in("systemType", Menu.SystemType.ALL, system));	//所属系统
-		menuCriteria.addOrder(Order.asc("sortNo"));	//排序
 
-		return dao.criteriaQuery(menuCriteria);
+		if(StringUtils.isNotBlank(systemId)) {
+			systemMenuCriteria.add(Restrictions.eq("systemId", systemId));	//所属系统
+		}
+
+		systemMenuCriteria.addOrder(Order.asc("menu." + SORT_PARAM));	//排序
+
+		systemMenuCriteria.setProjection(Projections.property("menu"));
+
+		return dao.criteriaQuery(systemMenuCriteria);
 	}
 	
 	/**
 	 * 获取企业下全部可分配菜单，功能角色分配菜单时使用
-	 * @param system 系统
+	 * @param systemId 系统ID
 	 * @return 全部可分配菜单
 	 */
-	public List<Menu> getAllAssignableMenu(Menu.SystemType system) {
-		DetachedCriteria menuCriteria = DetachedCriteria.forClass(Menu.class);	//菜单查询
-		menuCriteria.add(Restrictions.eq(DELETE_PARAM, false));
-		menuCriteria.add(Restrictions.in("isPublic", 0, 1));
-		menuCriteria.add(Restrictions.in("assignable", true));
-		menuCriteria.add(Restrictions.in("systemType", Menu.SystemType.ALL, system));	//所属系统
-		menuCriteria.addOrder(Order.asc("sortNo"));	//排序
+	public List<Menu> getAllAssignableMenu(String systemId) {
+		DetachedCriteria systemMenuCriteria = DetachedCriteria.forClass(SystemMenu.class);	//菜单查询
+		systemMenuCriteria.createAlias("system", "system");
+		systemMenuCriteria.createAlias("menu", "menu");
+		systemMenuCriteria.add(Restrictions.eq(DELETE_PARAM, false));
+		systemMenuCriteria.add(Restrictions.eq("system." + DELETE_PARAM, false));
+		systemMenuCriteria.add(Restrictions.eq("menu." + DELETE_PARAM, false));
+		systemMenuCriteria.add(Restrictions.in("menu.isPublic", 0, 1));
+		systemMenuCriteria.add(Restrictions.in("menu.assignable", true));
+		systemMenuCriteria.add(Restrictions.eq("systemId", systemId));	//所属系统
+		systemMenuCriteria.addOrder(Order.asc("menu." + SORT_PARAM));	//排序
 
-		return dao.criteriaQuery(menuCriteria);
+		systemMenuCriteria.setProjection(Projections.property("menu"));
+
+		return dao.criteriaQuery(systemMenuCriteria);
 	}
 
 	@Override

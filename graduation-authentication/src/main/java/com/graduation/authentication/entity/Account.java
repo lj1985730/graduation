@@ -3,17 +3,17 @@ package com.graduation.authentication.entity;
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
  * 权限-账户-实体
- * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @author Liu Jun at 2016-7-31 14:14:44
+ * @since v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_ACCOUNT")
@@ -25,14 +25,14 @@ public class Account extends BaseEntity {
 	 * 用户名
 	 */
 	@NotBlank(message = "用户名不能为空")
-	@Length(max = 50, message = "用户名长度不能超过50")
+	@Length(max = 100, message = "用户名长度不能超过100")
 	private String name;
 
 	/**
 	 * 密码
 	 */
 	@NotBlank(message = "密码不能为空")
-	@Length(max = 50, message = "密码长度不能超过50")
+	@Length(max = 100, message = "密码长度不能超过100")
 	private String password;
 
 	/**

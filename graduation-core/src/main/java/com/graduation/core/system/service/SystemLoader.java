@@ -1,4 +1,4 @@
-package com.graduation.authentication.base.service;
+package com.graduation.core.system.service;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class SystemLoader implements InitializingBean {
 
     @Resource
-    private SysConfigService service;
+    private SystemConfigService service;
 
     /**
      * 定时任务线程池
@@ -28,7 +29,7 @@ public class SystemLoader implements InitializingBean {
     /**
      * 系统配置集合
      */
-    public static Map<String, String> configMap = new HashMap<>();
+    static Map<String, String> configMap = new HashMap<>();
 
     /**
      * 获取系统配置
@@ -54,6 +55,7 @@ public class SystemLoader implements InitializingBean {
     /**
      * 关闭配置自动刷新服务.
      */
+    @PreDestroy
     public static void shutdown() {
         executorService.shutdown();
     }

@@ -1,19 +1,19 @@
 package com.graduation.authentication.entity;
 
 import com.graduation.core.base.entity.BaseEntity;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
  * 权限-角色-实体
- * @author Liu Jun
- * @version 2016-7-31 14:14:44
+ * @author Liu Jun at 2016-7-31 14:14:44
+ * @since v1.0.0
  */
 @Entity
 @Table(name = "T_AUTH_ROLE")
@@ -41,27 +41,16 @@ public class Role extends BaseEntity {
 	private Boolean enabled;
 
 	/**
-	 * 备注
-	 */
-	@Length(max = 2000, message = "备注长度不能超过2000")
-	private String remark;
-
-	/**
 	 * 是否系统角色
 	 */
 	@NotNull(message = "是否系统角色不可为空")
 	private Boolean isSystem;
 
 	/**
-	 * 部门
+	 * 备注
 	 */
-	private Department department;
-
-	/**
-	 * 部门ID
-	 */
-	@Length(max = 36, message = "部门ID长度不能超过36")
-	private String departmentId;
+	@Length(max = 1000, message = "备注长度不能超过1000")
+	private String remark;
 
 	@Column(name = "NAME")
 	public String getName() {
@@ -91,15 +80,6 @@ public class Role extends BaseEntity {
 		this.enabled = enabled;
 	}
 
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
 	@Column(name = "IS_SYSTEM")
 	@Type(type = "yes_no")
 	public Boolean getIsSystem() {
@@ -110,23 +90,12 @@ public class Role extends BaseEntity {
 		this.isSystem = isSystem;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-	@NotFound(action = NotFoundAction.IGNORE)
-	public Department getDepartment() {
-		return department;
+	@Column(name = "REMARK")
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-
-	@Column(name = "DEPARTMENT_ID")
-	public String getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(String departmentId) {
-		this.departmentId = departmentId;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

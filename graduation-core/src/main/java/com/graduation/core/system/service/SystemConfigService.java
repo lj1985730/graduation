@@ -1,8 +1,8 @@
-package com.graduation.authentication.base.service;
+package com.graduation.core.system.service;
 
-import com.graduation.authentication.base.entity.SysConfig;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.BaseService;
+import com.graduation.core.system.entity.SystemConfig;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -18,9 +18,9 @@ import java.util.Map;
  * @since 2016-8-2 22:43:06
  */
 @Service
-public class SysConfigService extends BaseService<SysConfig> {
+public class SystemConfigService extends BaseService<SystemConfig> {
 
-	private static Logger logger = LoggerFactory.getLogger(SysConfigService.class);
+	private static Logger logger = LoggerFactory.getLogger(SystemConfig.class);
 
 	@Override
 	public List<Map<String, String>> genTotalRow() {
@@ -30,14 +30,14 @@ public class SysConfigService extends BaseService<SysConfig> {
 	/**
 	 * 加载系统参数
 	 */
-	public void loadSystemConfig() {
+	void loadSystemConfig() {
 		logger.debug("加载系统参数...");
-		DetachedCriteria criteria = DetachedCriteria.forClass(SysConfig.class);
+		DetachedCriteria criteria = DetachedCriteria.forClass(SystemConfig.class);
 		criteria.add(Restrictions.eq("enable", true));
 		criteria.add(Restrictions.eq(BaseService.DELETE_PARAM, false));
-		List<SysConfig> configList = this.searchByCriteria(criteria);
+		List<SystemConfig> configList = this.searchByCriteria(criteria);
 		SystemLoader.configMap.clear();
-		for (SysConfig conf : configList) {
+		for (SystemConfig conf : configList) {
 			String key = conf.getKey();
 			try {
 				SystemLoader.configMap.put(key, conf.getValue());
@@ -50,20 +50,20 @@ public class SysConfigService extends BaseService<SysConfig> {
 	}
 
 	@Override
-	public void beforeCreate(SysConfig entity) {
+	public void beforeCreate(SystemConfig entity) {
 		entity.setEnable(true);
 		entity.setEditable(true);
 	}
 
 	@Override
-	public void beforeDelete(SysConfig entity) {
+	public void beforeDelete(SystemConfig entity) {
 		if(!entity.getEditable()) {
 			throw new BusinessException("该项目禁止编辑！");
 		}
 	}
 
 	@Override
-	public void beforeUpdate(SysConfig entity) {
+	public void beforeUpdate(SystemConfig entity) {
 		if(!entity.getEditable()) {
 			throw new BusinessException("该项目禁止编辑！");
 		}

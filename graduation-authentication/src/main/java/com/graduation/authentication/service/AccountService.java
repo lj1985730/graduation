@@ -2,7 +2,7 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.Account;
 import com.graduation.authentication.entity.AccountRole;
-import com.graduation.authentication.base.service.SystemLoader;
+import com.graduation.core.system.service.SystemLoader;
 import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.security.Encryptor;

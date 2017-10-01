@@ -1,7 +1,7 @@
 package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.*;
-import com.graduation.authentication.base.service.SystemLoader;
+import com.graduation.core.system.service.SystemLoader;
 import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.entity.BaseEntity;
 import com.graduation.core.base.exception.BusinessException;
@@ -171,7 +171,7 @@ public class LoginService extends BaseService<BaseEntity> {
 		//保存菜单权限列表
 		List<Menu> userMenu;
 		if(account.getSuperAccount()) {	//超管直接通过
-			userMenu = menuService.getAllFrontMenu(Menu.SystemType.ALL);
+			userMenu = menuService.getAllFrontMenu(null);
 		} else {
 			userMenu = menuService.getUserMenu(account.getId());
 		}
@@ -195,7 +195,7 @@ public class LoginService extends BaseService<BaseEntity> {
 		if(!account.getSuperAccount()) {	//超管直接通过
 			return;
 		} else {
-			userMenu = menuService.getAllBackMenu(Menu.SystemType.valueOf(SystemLoader.getConfigValue("SYSTEM", null)));
+			userMenu = menuService.getAllBackMenu(SystemLoader.getConfigValue("SYSTEM", null));
 		}
 		List<String> menuIds = EntityUtil.getAllId(userMenu);
 		StringBuilder menuIdStr = new StringBuilder("");
