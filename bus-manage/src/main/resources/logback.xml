@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan="true" scanPeriod="30 seconds" -->
+<configuration debug="false" scan="false" scanPeriod="30 seconds">
+
+	<!--关闭钩子-->
+	<shutdownHook />
+
+	<!-- 控制台输出 -->
+	<appender name="consoleOut" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- warn信息文件 -->
+	<appender name="warnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.home}/logs/yonyou_warn.log</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- daily rollover -->
+ 			<fileNamePattern>${catalina.home}/logs/yonyou_warn.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+
+ 			<!-- set file's max size, add new file while over max size -->
+			<maxFileSize>1MB</maxFileSize>
+
+      		<!-- keep 30 days' worth of history -->
+      		<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- error信息文件 -->
+	<appender name="errorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.home}/logs/yonyou_error.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.home}/logs/yonyou_error.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+			<maxFileSize>1mb</maxFileSize>
+      		<maxHistory>90</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- com.yonyou.test下限制输出级别 -->
+	<!-- <logger name="com.yonyou.test" level="WARN" /> -->
+
+	 <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
+<!--    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type" level="TRACE" />
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />-->
+
+	<root level="INFO">
+		<appender-ref ref="consoleOut" />
+		<appender-ref ref="warnFile" />
+		<appender-ref ref="errorFile" />
+	</root>
+</configuration>

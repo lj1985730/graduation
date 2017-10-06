@@ -44,7 +44,7 @@ public abstract class BaseService<E extends BaseEntity> {
 	/**
 	 * 统一注入DAO层
 	 */
-	@Resource(name="baseDao")
+	@Resource
 	protected BaseDao dao;
 	
 	/**
@@ -62,6 +62,7 @@ public abstract class BaseService<E extends BaseEntity> {
 	/**
 	 * 反射获取泛型Class
 	 */
+	@SuppressWarnings("unchecked")
 	public BaseService() {
 		Type genType = getClass().getGenericSuperclass();
 		Type[] params = ((ParameterizedType) genType).getActualTypeArguments();

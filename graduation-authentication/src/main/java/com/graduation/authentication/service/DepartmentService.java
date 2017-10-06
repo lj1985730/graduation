@@ -30,14 +30,15 @@ public class DepartmentService extends TreeService<Department> {
 	 * @param parentId	父节点Id
 	 * @return 最大序号
      */
+	@SuppressWarnings("unchecked")
 	public Integer searchMaxSort(String parentId) {
 		Criteria criteria = DetachedCriteria.forClass(Department.class).getExecutableCriteria(dao.getSession());
 		criteria.add(Restrictions.eq(DELETE_PARAM, false));
 		criteria.add(Restrictions.eq("parentId", parentId));
 
 		ProjectionList projectionList = Projections.projectionList();
-		projectionList.add(Projections.max("sortNo"));
-		projectionList.add(Projections.property("sortNo"));
+		projectionList.add(Projections.max("sort"));
+		projectionList.add(Projections.property("sort"));
 		criteria.setProjection(projectionList);
 		List<Integer> maxSort = criteria.list();
 		if(maxSort.isEmpty()) {

@@ -10,18 +10,24 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
         default-lazy-init="true">
 
+    <context:annotation-config />
+
+    <!-- 注入DAO -->
+    <bean id="dao" class="com.graduation.core.base.dao.BaseDao" />
+
+    <bean id="systemConfigService" class="com.graduation.core.system.service.SystemConfigService" />
+    <bean id="systemLoader" class="com.graduation.core.system.service.SystemLoader" destroy-method="shutdown" lazy-init="false" />
+
     <!-- 初始化bean上下文帮助类 -->
     <bean class="com.graduation.core.base.util.SpringContextUtil" />
-
-    <!-- 注册了AutowiredAnnotationBeanPostProcessor和CommonAnnotationBeanPostProcessor <context:annotation-config/>可以不写 -->
-    <context:component-scan base-package="com.graduation.core.**.dao" />
 
     <!-- 可追加配置二级缓存 -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" destroy-method="destroy">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <list>
-                <value>com.graduation.**.entity</value>
+                <!--<value>com.graduation.**.entity</value>-->
+                <value>com.graduation.authentication.entity</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -36,7 +42,7 @@
                 <prop key="hibernate.max_fetch_depth">2</prop>
                 <prop key="hibernate.generate_statistics">false</prop>
                 <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
-                <prop key="current_session_context_class">thread</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
             </props>
         </property>
     </bean>
@@ -49,19 +55,5 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     <tx:annotation-driven />
-
-    <!-- 统一异常处理 -->
-    <!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->
-    <!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- 特殊处理异常 -->
-        <property name="exceptionMappings">
-            <props>
-                <!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
-                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">/error</prop>
-            </props>
-        </property>
-        <property name="warnLogCategory" value="WARN" />
-    </bean>
 
 </beans>

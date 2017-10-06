@@ -114,7 +114,6 @@ public class BaseDao {
 	 * @param className 查询对象类型
 	 * @param id 查询对象ID
 	 * @return 查询对象
-	 * @throws ClassNotFoundException 
 	 */
 	@SuppressWarnings("unchecked")
 	public <E extends BaseEntity> E get(final String className, final Serializable id) throws ClassNotFoundException {
@@ -167,11 +166,11 @@ public class BaseDao {
 	 * @param detachedCriteria QBC查询对象
 	 * @return List 查询不分页对象集合
 	 */
+	@SuppressWarnings("unchecked")
 	public <E> List<E> criteriaQuery(DetachedCriteria detachedCriteria) {
 		Session session = this.getSession();
 		Criteria criteria = detachedCriteria.getExecutableCriteria(session);
-		List<E> list = (List<E>) criteria.list();
-		return list;
+		return (List<E>) criteria.list();
 	}
 
 	/**
@@ -199,12 +198,11 @@ public class BaseDao {
 		Criteria criteria = detachedCriteria.getExecutableCriteria(session);
 //		CriteriaImpl impl = (CriteriaImpl) criteria;
 //		Projection projection = impl.getProjection();
-		Long count = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-//		criteria.setProjection(projection);
+		//		criteria.setProjection(projection);
 //		if (projection == null) {
 //			criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
 //		}
-		return count;
+		return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 	
 	/**
@@ -212,6 +210,7 @@ public class BaseDao {
 	 * @param hql 查询hql
 	 * @return List 查询对象集合
 	 */
+	@SuppressWarnings("unchecked")
 	public <E extends BaseEntity> List<E> hqlQuery(final String hql) {
 		Session session = this.getSession();
 		Query query = session.createQuery(hql);
@@ -224,6 +223,7 @@ public class BaseDao {
 	 * @param params hql中对应参数数组
 	 * @return 查询结果集
 	 */
+	@SuppressWarnings("unchecked")
 	public <E> List<E> hqlQuery(final String hql, final Object[] params) {
 		Session session = this.getSession();
 		Query query = session.createQuery(hql);
@@ -285,6 +285,7 @@ public class BaseDao {
 	 * @param sql 查询sql
 	 * @return List 查询对象集合
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Map<String, String>> sqlQuery(final String sql) {
 		Session session = this.getSession();
 		SQLQuery query = session.createSQLQuery(sql);

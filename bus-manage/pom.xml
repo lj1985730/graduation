@@ -16,6 +16,12 @@
 
     <build>
         <finalName>bus-manage</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
@@ -69,16 +75,16 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <context.import>classpath*:applicationContext-*.xml</context.import>
+            </properties>
             <build>
-                <filters>
-                    <filter>src/main/resources/bus-manage.properties</filter>
-                </filters>
                 <plugins>
                     <plugin>
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <packagingExcludes>
-                                %regex[WEB-INF/classes/(?!applicationContext-*.xml|logback.xml).*],
+                                %regex[WEB-INF/classes/(?!applicationContext.xml|logback.xml|com.graduation.bus).*],
                                 WEB-INF/classes/*.properties
                             </packagingExcludes>
                         </configuration>

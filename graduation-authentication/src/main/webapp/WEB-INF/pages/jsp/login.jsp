@@ -20,14 +20,14 @@
 		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<meta content="landsea" name="author"/>
-		<link type="text/css" rel="stylesheet" href="resources/css/font-awesome.min.css" />
-		<link type="text/css" rel="stylesheet" href="resources/css/simple-line-icons.min.css" />
-		<link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="resources/css/login/uniform.default.css" />
-		<link type="text/css" rel="stylesheet" href="resources/plugins/bootstrap-select/bootstrap-select.css" />
-		<link type="text/css" rel="stylesheet" href="resources/css/login/login-soft.css" />
-		<link type="text/css" rel="stylesheet" href="resources/plugins/metronic/components.css" id="style_components" />
-		<link type="text/css" rel="stylesheet" href="resources/css/layout.css" />
+		<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/simple-line-icons.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/login/uniform.default.css" />
+		<link type="text/css" rel="stylesheet" href="plugins/bootstrap-select/bootstrap-select.css" />
+		<link type="text/css" rel="stylesheet" href="css/login/login-soft.css" />
+		<link type="text/css" rel="stylesheet" href="plugins/metronic/components.css" id="style_components" />
+		<link type="text/css" rel="stylesheet" href="css/layout.css" />
 		<!--[if lt IE 9]>
 		<script src="resources/javascripts/html5shiv.min.js"></script>
 		<![endif]-->

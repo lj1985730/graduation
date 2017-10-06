@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
-	<mapping decorator="/WEB-INF/templates/jsp/content.jsp"/>
+	<mapping decorator="/WEB-INF/pages/jsp/content.jsp"/>
 	<!-- 排除 -->
-	<mapping path="/login" exclue="true" />
-	<mapping path="/companyMap" exclue="true" />
-	<mapping path="/loginback" exclue="true" />
-	<mapping path="/wfengine/designer/wfChartDesigner/wfChartDesignerUtil" exclue="true" />
-	<mapping path="/wfengine/instance/wfChartInstance/wfChartInstanceUtil" exclue="true" />
-	<mapping path="/chat/base/**" exclue="true" />
-    <mapping path="/templates/jsp/report/base/reportContainer.jsp" exclue="true" />
-    <mapping path="/admin" exclue="true" />
-    <mapping path="/portal/front/**" exclue="true" />
-    <mapping path="/portal/front/**" exclue="true" />
-    <mapping path="/front/manage/cmsContent/contentDetail" exclue="true" />
-    <mapping path="/front/manage/cmsContent/contentList" exclue="true" />
-    <mapping path="/front/manage/cmsContent/contentSearch" exclue="true" />
-    <mapping path="/front/manage/cmsContent/photoDetail" exclue="true" />
-    <mapping path="/front/manage/cmsContent/linkDetail" exclue="true" />
-    <mapping path="/front/manage/cmsContent/login" exclue="true" />
-	<mapping path="/authentication/fingerprint/validate" exclue="true" />
-	<mapping path="/authentication/fingerprint/register" exclue="true" />
-	<mapping path="/system/util/showPdf/**" exclue="true" />
+	<mapping path="/" exclue="true" />
+	<mapping path="/loginView" exclue="true" />
+	<mapping path="/loginbackView" exclue="true" />
 
 </sitemesh>

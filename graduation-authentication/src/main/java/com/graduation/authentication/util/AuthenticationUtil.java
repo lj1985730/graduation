@@ -232,6 +232,7 @@ public class AuthenticationUtil {
      * 获取权限菜单信息队列
      * @return 权限菜单信息队列
      */
+    @SuppressWarnings("unchecked")
     public static List<Menu> getMenuList() {
         Object object = getInfo(LoginInfo.MENU_LIST);
         return object == null ? null : (List<Menu>)object;

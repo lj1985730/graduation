@@ -8,6 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -30,8 +32,8 @@ public class SystemConfigService extends BaseService<SystemConfig> {
 	/**
 	 * 加载系统参数
 	 */
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	void loadSystemConfig() {
-		logger.debug("加载系统参数...");
 		DetachedCriteria criteria = DetachedCriteria.forClass(SystemConfig.class);
 		criteria.add(Restrictions.eq("enable", true));
 		criteria.add(Restrictions.eq(BaseService.DELETE_PARAM, false));
@@ -41,9 +43,7 @@ public class SystemConfigService extends BaseService<SystemConfig> {
 			String key = conf.getKey();
 			try {
 				SystemLoader.configMap.put(key, conf.getValue());
-				logger.debug("加载系统参数:" + key + "=" + conf.getValue());
 			} catch (Exception ex) {
-				logger.error("加载系统参数（失败）:" + key + "=" + conf.getValue());
 			}
 		}
 		logger.debug("加载系统参数完毕.");
