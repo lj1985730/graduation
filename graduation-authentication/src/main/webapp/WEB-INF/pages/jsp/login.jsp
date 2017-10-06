@@ -28,10 +28,7 @@
 		<link type="text/css" rel="stylesheet" href="css/login/login-soft.css" />
 		<link type="text/css" rel="stylesheet" href="plugins/metronic/components.css" id="style_components" />
 		<link type="text/css" rel="stylesheet" href="css/layout.css" />
-		<!--[if lt IE 9]>
-		<script src="resources/javascripts/html5shiv.min.js"></script>
-		<![endif]-->
-		<script type="text/javascript" src="resources/javascripts/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript">
     		var pathArray = top.window.location.href.split('/');
     		var protocol = pathArray[0];
@@ -101,7 +98,7 @@
 	            } else if(e.which) {	//兼容非IE浏览器
                 	_key = e.which;
 				}
-				if (_key == 0xD) {	//按下回车键时触发
+				if (_key === 0xD) {	//按下回车键时触发
 					doLogin();
 				}
 			}
@@ -110,7 +107,7 @@
 	<body class="login" onkeydown="enterkeyDown(event)">
 		<div class="logo">
 			<div class="form-title">
-				<span style="color: white; font-size: 55px;">HIS系统</span>
+				<span style="color: white; font-size: 55px;">公交管理系统</span>
 			</div>
 		</div>
 		<div class="menu-toggler sidebar-toggler"></div>
@@ -133,7 +130,7 @@
 			<div class="form-group">
 				<div class="input-icon">
 					<i class="fa fa-lock"></i>
-					<input type="password" id="pass" name="pass" value="123123" class="form-control placeholder-no-fix" autocomplete="off" placeholder="密码" /><!-- ${user.loginPassword} -->
+					<input type="password" id="pass" name="pass" value="" class="form-control placeholder-no-fix" autocomplete="off" placeholder="密码" /><!-- ${user.loginPassword} -->
 				</div>
 			</div>
 			<div class="form-actions">
@@ -150,16 +147,16 @@
 			 2017 &copy; EDU
 		</div>
 		<!--[if lt IE 9]>
-		<script type="text/javascript" src="resources/javascripts/bootstrap/respond.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/bootstrap/excanvas.min.js"></script>
+		<script type="text/javascript" src="scripts/bootstrap/respond.min.js"></script>
+		<script type="text/javascript" src="scripts/bootstrap/excanvas.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="resources/javascripts/bootstrap/bootstrap.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/login/jquery-migrate.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/login/jquery.uniform.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/login/jquery.cokie.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/login/jquery.backstretch.min.js"></script>
-		<script type="text/javascript" src="resources/javascripts/login/login-soft.js"></script>
-		<script type="text/javascript" src="resources/plugins/metronic/metronic.js"></script>
+		<script type="text/javascript" src="scripts/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="scripts/login/jquery-migrate.min.js"></script>
+		<script type="text/javascript" src="scripts/login/jquery.uniform.min.js"></script>
+		<script type="text/javascript" src="scripts/login/jquery.cokie.min.js"></script>
+		<script type="text/javascript" src="scripts/login/jquery.backstretch.min.js"></script>
+		<script type="text/javascript" src="scripts/login/login-soft.js"></script>
+		<script type="text/javascript" src="plugins/metronic/metronic.js"></script>
 		<script>
 			$(function() {
 				Metronic.init();

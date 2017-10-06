@@ -6,7 +6,12 @@ import com.graduation.authentication.service.LoginService;
 import com.graduation.authentication.service.MenuService;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
+import com.graduation.core.base.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,18 +73,26 @@ class LoginController extends BaseController {
 	@ResponseBody
 	public JsonResult doLogin(@RequestBody Map<String, String> userMap, HttpServletRequest request, HttpServletResponse response) {
 
-		//login step 1: load user.
-		Account account = accountService.valid(userMap.get("name"), userMap.get("pass"));
+		Subject subject = SecurityUtils.getSubject();	//shiro主体
+		UsernamePasswordToken token = new UsernamePasswordToken(userMap.get("name"), userMap.get("pass"));
+		try {
+			subject.login(token);
+		} catch (IncorrectCredentialsException ice) {
+			throw new BusinessException("密码错误！", ice);
+		}
 
-		//login step 2: valid user.
-		service.validLoginAuth(account);
-
-		//login step 3: book login info.
-		service.bookLoginInfo(account);	//写入用户信息、权限信息
-
-		account.setLastLogon(account.getLastModifyTime());
-		accountService.update(account);
-
+//		//login step 1: load user.
+//		Account account = accountService.valid(userMap.get("name"), userMap.get("pass"));
+//
+//		//login step 2: valid user.
+//		service.validLoginAuth(account);
+//
+//		//login step 3: book login info.
+//		service.bookLoginInfo(account);	//写入用户信息、权限信息
+//
+//		account.setLastLogon(account.getLastModifyTime());
+//		accountService.update(account);
+//
 		return new JsonResult(true, "登录成功！");
 	}
 

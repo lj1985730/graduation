@@ -3,6 +3,8 @@ package com.graduation.authentication.util;
 import com.graduation.authentication.entity.Menu;
 import com.graduation.core.base.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -16,6 +18,34 @@ import java.util.List;
  * @version 2016-7-31 15:23:42
  */
 public class AuthenticationUtil {
+
+    /**
+     * 密码加密方式
+     */
+    private static final String ALGORITHM_NAME = "MD5";
+
+    /**
+     * 密码加密盐值
+     */
+    static final String PASS_SALT = "graduation";
+
+    /**
+     * 密码加密次数
+     */
+    private static final int HASH_ITERATIONS = 2;
+
+    /**
+     * 密码加密<br>
+     * 1.MD5加密
+     * 2.盐值为PASS_SALT的base64加密
+     * @param password	密码明文
+     * @return	密码密文
+     */
+    public static String encryptPassword(String password) {
+        return new SimpleHash(ALGORITHM_NAME, password, ByteSource.Util.bytes(PASS_SALT), HASH_ITERATIONS).toHex();
+    }
+
+
 
     public enum LoginInfo {
         ACCOUNT_ID, ACCOUNT_NAME, ACCOUNT_PASS, SUPER_ACCOUNT,

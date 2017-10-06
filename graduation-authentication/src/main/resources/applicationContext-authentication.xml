@@ -16,8 +16,8 @@
    <mvc:annotation-driven validator="validator" />
 
    <!-- 请求响应拦截器 -->
-   <mvc:interceptors>
-      <!-- 拦截器执行控制器拦截，用于cookie身份和权限验证 -->
+   <!--<mvc:interceptors>
+      &lt;!&ndash; 拦截器执行控制器拦截，用于cookie身份和权限验证 &ndash;&gt;
       <mvc:interceptor>
          <mvc:mapping path="/**" />
          <mvc:exclude-mapping path="/"/>
@@ -34,6 +34,6 @@
 
          <bean class="com.graduation.authentication.util.AuthenticationInterceptor" />
       </mvc:interceptor>
-   </mvc:interceptors>
+   </mvc:interceptors>-->
 
 </beans>

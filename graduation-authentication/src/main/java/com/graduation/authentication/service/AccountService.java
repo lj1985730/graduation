@@ -54,6 +54,23 @@ public class AccountService extends BaseService<Account> {
     }
 
 	/**
+	 * 根据名称获取账户
+	 * @param name 账户名称
+	 * @return 账户
+	 */
+	public Account searchByName(String name) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Account.class);
+		criteria.add(Restrictions.eq("name", name));
+		criteria.add(Restrictions.eq(DELETE_PARAM, false));
+		List<Account> accounts = dao.criteriaPageQuery(criteria, 0, 1);
+		if (accounts.size() == 0) {
+			return null;
+		} else {
+			return accounts.get(0);
+		}
+	}
+
+	/**
 	 * 判断该用户在AccountRole表中是否有相应的roleId
 	 * @param accountId	账户
 	 * @param roleId	角色
