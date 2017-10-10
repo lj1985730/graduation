@@ -4,6 +4,6 @@
 	<!-- 排除 -->
 	<mapping path="/" exclue="true" />
 	<mapping path="/loginView" exclue="true" />
-	<mapping path="/loginbackView" exclue="true" />
+	<mapping path="/loginBackView" exclue="true" />
 
 </sitemesh>

@@ -19,7 +19,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<meta content="landsea" name="author"/>
 		<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="css/simple-line-icons.min.css" />
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />

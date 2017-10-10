@@ -11,7 +11,7 @@
     <mvc:resources mapping="/plugins/**" location="/WEB-INF/plugins/" cache-period="31536000" />
     <mvc:resources mapping="/scripts/**" location="/WEB-INF/scripts/" cache-period="31536000" />
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/" cache-period="31536000" />
-    <mvc:resources mapping="/images/**" location="/WEB-INF/images/" cache-period="31536000" />
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/" cache-period="31536000" />
 
     <!-- 视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
