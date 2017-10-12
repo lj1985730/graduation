@@ -94,7 +94,7 @@
             /plugins/** = anon
             /scripts/** = anon
             /css/** = anon
-            /images/** = anon
+            /img/** = anon
             /index.jsp = anon
             /unauthorized.jsp = anon
             <!-- 请求 logout地址，shiro去清除session -->
