@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
@@ -15,8 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,12 +27,12 @@ public abstract class BaseController {
 	/**
 	 * 日志对象
 	 */
-	protected Logger logger = LoggerFactory.getLogger(BaseController.class);
+	private Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 	/**
 	 * 页面相对路径
 	 */
-	private static final String DEFAULT_TEMPLATE = "/jsp";
+	private static final String DEFAULT_TEMPLATE = "/";
 
 	/**
 	 * 返回页面视图

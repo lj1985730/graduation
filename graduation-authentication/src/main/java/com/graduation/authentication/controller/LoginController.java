@@ -44,13 +44,13 @@ class LoginController extends BaseController {
 
 	@RequestMapping(value = { "/" })
 	public String index() {
-		return redirectPageView("/loginView");
+		return redirectPageView("/home");
 	}
 
 	/**
 	 * 登录页
 	 */
-	@RequestMapping(value = { "/loginView" })
+	@RequestMapping(value = { "/login" })
 	public ModelAndView loginView() {
 		Account account = new Account();
 		return pageView("/login", "account", account);
@@ -134,9 +134,9 @@ class LoginController extends BaseController {
 	/**
 	 * 主页
 	 */
-	@RequestMapping(value = { "/homeView" })
+	@RequestMapping(value = { "/home" })
 	public String home() {
-		return pageView("/index");
+		return pageView("/home");
 	}
 
 	/**

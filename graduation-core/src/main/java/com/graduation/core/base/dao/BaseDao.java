@@ -5,8 +5,11 @@ package com.graduation.core.base.dao;
 
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.*;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -196,13 +199,14 @@ public class BaseDao {
 	public Long getCountByCriteria(DetachedCriteria detachedCriteria) {
 		Session session = this.getSession();
 		Criteria criteria = detachedCriteria.getExecutableCriteria(session);
-//		CriteriaImpl impl = (CriteriaImpl) criteria;
-//		Projection projection = impl.getProjection();
-		//		criteria.setProjection(projection);
-//		if (projection == null) {
-//			criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
-//		}
-		return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		//查询数量后，需要将查询投影置回ROOT ENTITY
+        Projection projection = ((CriteriaImpl) criteria).getProjection();
+        long count = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+        criteria.setProjection(projection);
+        if (projection == null) {
+            criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+        }
+        return count;
 	}
 	
 	/**

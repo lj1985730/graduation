@@ -3,8 +3,8 @@
 <html>
 	<head>
 		<link type="text/css" rel="stylesheet" href="resources/css/tree/style.min.css" />
-		<script type="text/javascript" src="resources/javascripts/jstree.min.js"></script>
-		<script type="text/javascript" src="resources/pages/js/authority/menu.js"></script>
+		<script type="text/javascript" src="resources/scripts/jstree.min.js"></script>
+		<script type="text/javascript" src="resources/scripts/authentication/menu.js"></script>
 	</head>
 	<body>
 		<ls:nav father="系统管理" model="菜单管理" />

@@ -27,7 +27,7 @@
         <property name="packagesToScan">
             <list>
                 <!--<value>com.graduation.**.entity</value>-->
-                <value>com.graduation.authentication.entity</value>
+                <value>com.graduation.**.entity</value>
             </list>
         </property>
         <property name="hibernateProperties">

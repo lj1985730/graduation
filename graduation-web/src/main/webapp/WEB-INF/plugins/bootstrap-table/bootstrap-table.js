@@ -1823,12 +1823,10 @@
             contentType: this.options.contentType,
             dataType: this.options.dataType,
             success: function (res) {
-//            	alert(JSON.stringify(res));
             	res = dataEncodeOut(res);
             	if(that.options.pagination && that.options.sidePagination === 'server') {
             		res = calculateObjectValue(that.options, that.options.responseHandler, [res], res);
             	}
-//            	alert(JSON.stringify(res));
                 that.load(res);
                 that.trigger('load-success', res);
                 $("[data-toggle='tooltip']").tooltip();

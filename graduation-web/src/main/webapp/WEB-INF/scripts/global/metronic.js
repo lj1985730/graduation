@@ -355,18 +355,18 @@ var Metronic = function() {
 
     // Handles Bootstrap Modals.
     var handleModals = function() {        
-        // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
+        // fix stackable model issue: when 2 or more modals opened, closing one of model will remove .model-open class.
         $('body').on('hide.bs.modal', function() {
-            if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
+            if ($('.model:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
-            } else if ($('.modal:visible').size() <= 1) {
+            } else if ($('.model:visible').size() <= 1) {
                 $('html').removeClass('modal-open');
             }
         });
 
         // fix page scrollbars issue
         $('body').on('show.bs.modal', '.modal', function() {
-            if ($(this).hasClass("modal-scroll")) {
+            if ($(this).hasClass("model-scroll")) {
                 $('body').addClass("modal-open-noscroll");
             }
         });
@@ -376,8 +376,8 @@ var Metronic = function() {
             $('body').removeClass("modal-open-noscroll");
         });
 
-        // remove ajax content and remove cache on modal closed 
-        $('body').on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
+        // remove ajax content and remove cache on model closed
+        $('body').on('hidden.bs.modal', '.model:not(.model-cached)', function () {
             $(this).removeData('bs.modal');
         });
     };

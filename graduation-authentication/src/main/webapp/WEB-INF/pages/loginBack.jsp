@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <%
@@ -15,19 +15,23 @@
 <!--<![endif]-->
 	<head>
 		<base href="<%=basePath%>" />
-		<title>HIS</title>
+		<title>BUS</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
-		<link type="text/css" rel="stylesheet" href="css/simple-line-icons.min.css" />
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="css/login/uniform.default.css" />
-		<link type="text/css" rel="stylesheet" href="plugins/bootstrap-select/bootstrap-select.css" />
-		<link type="text/css" rel="stylesheet" href="css/login/login-soft.css" />
-		<link type="text/css" rel="stylesheet" href="plugins/metronic/components.css" id="style_components" />
-		<link type="text/css" rel="stylesheet" href="css/layout.css" />
-		<script type="text/javascript" src="scripts/jquery-1.11.0.min.js"></script>
+		<meta content="landsea" name="author"/>
+		<link type="text/css" rel="stylesheet" href="resources/css/font-awesome.min.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/simple-line-icons.min.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/login/uniform.default.css" />
+		<link type="text/css" rel="stylesheet" href="resources/plugins/bootstrap-select/bootstrap-select.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/login/login-soft.css" />
+		<link type="text/css" rel="stylesheet" href="resources/plugins/metronic/components.css" id="style_components" />
+		<link type="text/css" rel="stylesheet" href="resources/css/layout.css" />
+		<!--[if lt IE 9]>
+		<script src="resources/javascripts/html5shiv.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="resources/javascripts/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript">
     		var pathArray = top.window.location.href.split('/');
     		var protocol = pathArray[0];
@@ -45,20 +49,18 @@
                 	msg.html("密码不能为空！");
                 	return false;
 				}
-				var rememberMe = document.getElementById("rememberMe").checked;
 				msg.html("登录中...");
 				$.ajax({
                 	type : "post",
 					timeout : 20000,
-					url : "login",
+					url : "loginBack",
 					dataType : "json",
 					contentType : "application/json",
 					data : JSON.stringify({
 						name : name,
-						pass : pass,
-						rememberMe : rememberMe
+						pass : pass
 					}),
-                	success : function(data, textStatus, resp) {
+                	success : function(data) {
 	                    if(!data) {
 	                        msg.html("系统没有响应，请联系管理员。");
 	                        return false;
@@ -90,23 +92,23 @@
     		/**
     		 * 回车登录
     		 */
-			function enterkeyDown(e) {
+			function enterKeyDown(e) {
             	var _key;
 	            if(window.event) { //兼容IE浏览器
 	                _key = e.keyCode;
 	            } else if(e.which) {	//兼容非IE浏览器
                 	_key = e.which;
 				}
-				if (_key === 0xD) {	//按下回车键时触发
+				if (_key == 0xD) {	//按下回车键时触发
 					doLogin();
 				}
 			}
 		</script>
 	</head>
-	<body class="login" onkeydown="enterkeyDown(event)">
+	<body class="login" onkeydown="enterKeyDown(event)">
 		<div class="logo">
 			<div class="form-title">
-				<span style="color: white; font-size: 55px;">公交管理系统</span>
+				<span style="color: white; font-size: 55px;">HIS系统(后台)</span>
 			</div>
 		</div>
 		<div class="menu-toggler sidebar-toggler"></div>
@@ -123,19 +125,20 @@
 			<div class="form-group">
 				<div class="input-icon">
 					<i class="fa fa-user"></i>
-					<input type="text" id="name" name="name" value="${user.loginName}" class="form-control placeholder-no-fix" autocomplete="off" placeholder="用户名" /><!-- ${user.loginName} -->
+					<input type="text" id="name" name="name" value="" class="form-control placeholder-no-fix" autocomplete="off" placeholder="用户名" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-icon">
 					<i class="fa fa-lock"></i>
-					<input type="password" id="pass" name="pass" value="" class="form-control placeholder-no-fix" autocomplete="off" placeholder="密码" /><!-- ${user.loginPassword} -->
+					<input type="password" id="pass" name="pass" value="" class="form-control placeholder-no-fix" autocomplete="off" placeholder="密码" />
 				</div>
 			</div>
 			<div class="form-actions">
-				<label class="checkbox" title="保存时限7天，公共网络慎用">
+				<%--<label class="checkbox" title="保存时限7天，公共网络慎用">
 					<input type="checkbox" id="rememberMe"  name="rememberMe" /> 记住账号 
-				</label>
+				</label>--%>
+				<label></label>
 				<button class="btn blue pull-right" onclick="doLogin();">
 				登录 <i class="m-icon-swapright m-icon-white"></i>
 				</button>
@@ -143,19 +146,19 @@
 		</div>
 		<!-- BEGIN COPYRIGHT -->
 		<div class="copyright">
-			 2017 &copy; EDU
+			 2016 &copy; HIS
 		</div>
 		<!--[if lt IE 9]>
-		<script type="text/javascript" src="scripts/bootstrap/respond.min.js"></script>
-		<script type="text/javascript" src="scripts/bootstrap/excanvas.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/bootstrap/respond.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/bootstrap/excanvas.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="scripts/bootstrap/bootstrap.min.js"></script>
-		<script type="text/javascript" src="scripts/login/jquery-migrate.min.js"></script>
-		<script type="text/javascript" src="scripts/login/jquery.uniform.min.js"></script>
-		<script type="text/javascript" src="scripts/login/jquery.cokie.min.js"></script>
-		<script type="text/javascript" src="scripts/login/jquery.backstretch.min.js"></script>
-		<script type="text/javascript" src="scripts/login/login-soft.js"></script>
-		<script type="text/javascript" src="plugins/metronic/metronic.js"></script>
+		<script type="text/javascript" src="resources/javascripts/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/login/jquery-migrate.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/login/jquery.uniform.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/login/jquery.cokie.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/login/jquery.backstretch.min.js"></script>
+		<script type="text/javascript" src="resources/javascripts/login/login-soft.js"></script>
+		<script type="text/javascript" src="resources/plugins/metronic/metronic.js"></script>
 		<script>
 			$(function() {
 				Metronic.init();
