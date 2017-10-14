@@ -44,7 +44,7 @@ class LoginController extends BaseController {
 
 	@RequestMapping(value = { "/" })
 	public String index() {
-		return redirectPageView("/home");
+		return "redirect:/home";
 	}
 
 	/**
@@ -94,6 +94,7 @@ class LoginController extends BaseController {
 //		accountService.update(account);
 //
 		return new JsonResult(true, "登录成功！");
+//		return "forward:/bus/station/home";
 	}
 
 	/**

@@ -5,7 +5,6 @@ import com.graduation.bus.infrastructure.entity.Station;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.web.util.TableParam;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +49,7 @@ class StationController extends BaseController {
     @ResponseBody
     public JsonResult create(@RequestBody Station entity) {
         service.create(entity);
-		return new JsonResult(JsonResult.CREATE_SUCCEED);
+		return new JsonResult(true, JsonResult.CREATE_SUCCEED);
     }
 
 	/**
@@ -61,7 +60,7 @@ class StationController extends BaseController {
 	@ResponseBody
 	public JsonResult modify(@RequestBody Station entity) {
 		service.update(entity);
-		return new JsonResult(JsonResult.UPDATE_SUCCEED);
+		return new JsonResult(true, JsonResult.UPDATE_SUCCEED);
 	}
 
 	/**
@@ -72,6 +71,6 @@ class StationController extends BaseController {
 	@ResponseBody
 	public JsonResult delete(@PathVariable("id") String id) {
 		service.delete(id);
-		return new JsonResult(JsonResult.DELETE_SUCCEED);
+		return new JsonResult(true, JsonResult.DELETE_SUCCEED);
 	}
 }

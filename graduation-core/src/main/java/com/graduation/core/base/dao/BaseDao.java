@@ -4,13 +4,16 @@
 package com.graduation.core.base.dao;
 
 import com.graduation.core.base.entity.BaseEntity;
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.internal.CriteriaImpl;
-import org.hibernate.transform.Transformers;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.type.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -22,6 +25,8 @@ import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -145,7 +150,7 @@ public class BaseDao {
 	public <E extends BaseEntity> List<E> getAll(final Class<E> clazz) {
 		Session session = this.getSession();
 		String hql = "From " + clazz.getName();
-		Query query = session.createQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		return (List<E>) query.list();
 	}
 	
@@ -160,7 +165,7 @@ public class BaseDao {
 	public <E extends BaseEntity> List<E> getAll(final Class<E> clazz, String orderColumn, String order) {
 		Session session = this.getSession();
 		String hql = "From " + clazz.getName() + " Order By " + orderColumn + " " + order;
-		Query query = session.createQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		return (List<E>) query.list();
 	}
 
@@ -217,7 +222,7 @@ public class BaseDao {
 	@SuppressWarnings("unchecked")
 	public <E extends BaseEntity> List<E> hqlQuery(final String hql) {
 		Session session = this.getSession();
-		Query query = session.createQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		return (List<E>) query.list();
 	}
 
@@ -230,7 +235,7 @@ public class BaseDao {
 	@SuppressWarnings("unchecked")
 	public <E> List<E> hqlQuery(final String hql, final Object[] params) {
 		Session session = this.getSession();
-		Query query = session.createQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		setQueryParameter(query, params);
 		return (List<E>) query.list();
 	}
@@ -242,7 +247,7 @@ public class BaseDao {
 	 */
 	public int hqlUpdate(final String hql) {
 		Session session = this.getSession();
-		return session.createQuery(hql).executeUpdate();
+		return session.createNativeQuery(hql).executeUpdate();
 	}
 
 	/**
@@ -253,12 +258,12 @@ public class BaseDao {
 	 */
 	public int hqlUpdate(final String hql, final Object[] params) {
 		Session session = this.getSession();
-		Query query = session.createQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		setQueryParameter(query, params);
 		return query.executeUpdate();
 	}
 
-	private void setQueryParameter(final Query query, final Object[] params) {
+	private void setQueryParameter(final NativeQuery query, final Object[] params) {
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++) {
 				Object obj = params[i];
@@ -266,17 +271,19 @@ public class BaseDao {
 					continue;
 				}
 				if (obj instanceof String) {
-					query.setString(i, (String) obj);
+					query.setParameter(i, obj, StringType.INSTANCE);
 				} else if (obj instanceof Integer) {
-					query.setInteger(i, (Integer) obj);
+					query.setParameter(i, obj, IntegerType.INSTANCE);
 				} else if (obj instanceof Long) {
-					query.setLong(i, (Long) obj);
+					query.setParameter(i, obj, LongType.INSTANCE);
 				} else if (obj instanceof Float) {
-					query.setFloat(i, (Float) obj);
+					query.setParameter(i, obj, FloatType.INSTANCE);
 				} else if (obj instanceof Double) {
-					query.setDouble(i, (Double) obj);
-				} else if (obj instanceof Date) {
-					query.setTimestamp(i, (Date) obj);
+					query.setParameter(i, obj, DoubleType.INSTANCE);
+				} else if (obj instanceof LocalDate) {
+					query.setParameter(i, obj, LocalDateType.INSTANCE);
+				} else if (obj instanceof LocalDateTime) {
+					query.setParameter(i, obj, LocalDateTimeType.INSTANCE);
 				} else {
 					query.setParameter(i, obj);
 				}
@@ -292,8 +299,8 @@ public class BaseDao {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, String>> sqlQuery(final String sql) {
 		Session session = this.getSession();
-		SQLQuery query = session.createSQLQuery(sql);
-		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		NativeQuery query = session.createNativeQuery(sql);
+//		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		return query.list();
 	}
 
@@ -306,8 +313,9 @@ public class BaseDao {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, String>> sqlQuery(final String sql, final Object[] params) {
 		Session session = this.getSession();
-		SQLQuery query = session.createSQLQuery(sql);
-		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		NativeQuery query = session.createNativeQuery(sql, HashMap.class);
+//		SQLQuery query = session.createSQLQuery(sql);
+//		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		setSQLQueryParameter(query, params);
 		return query.list();
 	}
@@ -319,7 +327,7 @@ public class BaseDao {
 	 */
 	public int sqlUpdate(final String sql) {
 		Session session = this.getSession();
-		return session.createSQLQuery(sql).executeUpdate();
+		return session.createNativeQuery(sql).executeUpdate();
 	}
 
 	/**
@@ -330,12 +338,12 @@ public class BaseDao {
 	 */
 	public int sqlUpdate(final String sql, final Object[] params) {
 		Session session = this.getSession();
-		SQLQuery query = session.createSQLQuery(sql);
+		NativeQuery query = session.createNativeQuery(sql);
 		setSQLQueryParameter(query, params);
 		return query.executeUpdate();
 	}
 
-	private void setSQLQueryParameter(final SQLQuery query, final Object[] params) {
+	private void setSQLQueryParameter(final NativeQuery query, final Object[] params) {
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++) {
 				Object obj = params[i];
@@ -343,15 +351,15 @@ public class BaseDao {
 					continue;
 				}
 				if (obj instanceof String) {
-					query.setString(i, (String) obj);
+					query.setParameter(i, obj, StringType.INSTANCE);
 				} else if (obj instanceof Integer) {
-					query.setInteger(i, (Integer) obj);
+					query.setParameter(i, obj, IntegerType.INSTANCE);
 				} else if (obj instanceof Long) {
-					query.setLong(i, (Long) obj);
+					query.setParameter(i, obj, LongType.INSTANCE);
 				} else if (obj instanceof Float) {
-					query.setFloat(i, (Float) obj);
+					query.setParameter(i, obj, FloatType.INSTANCE);
 				} else if (obj instanceof Double) {
-					query.setDouble(i, (Double) obj);
+					query.setParameter(i, obj, DoubleType.INSTANCE);
 				} else {
 					query.setParameter(i, obj);
 				}

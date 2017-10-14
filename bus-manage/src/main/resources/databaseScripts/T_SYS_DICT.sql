@@ -1,0 +1,19 @@
+-- 初始化脚本 - 字典
+DELETE FROM T_SYS_DICT WHERE CATEGORY_KEY IN ('BUS_CATEGORY', 'BUS_COMPANY');
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '一般公共汽车', '01', 'BUS_CATEGORY', 1, '1路—33路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '无轨电车', '02', 'BUS_CATEGORY', 2, '101路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '有轨电车', '03', 'BUS_CATEGORY', 3, '201路—203路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '外资线路', '04', 'BUS_CATEGORY', 4, '402路—414路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '小公共汽车', '05', 'BUS_CATEGORY', 5, '501路—541路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '小区线路', '06', 'BUS_CATEGORY', 6, '602路—613路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '联营线路', '07', 'BUS_CATEGORY', 7, '701路—715路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '环城旅游线路', '08', 'BUS_CATEGORY', 8, '801路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '空调线路', '09', 'BUS_CATEGORY', 9, 'K901路', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交一分公司', '01', 'BUS_COMPANY', 1, '大连公交客运集团有限公司汽车一分公司主要负责大连市10路、13路、15路、16路、23路、27路、32路、34路、59路、404路、406路、507路、901路、931路等14条公共汽车线路和501路、503路、505路、506路、527路、541路等6条小公汽线路，以及一条环城旅游线路的运营管理。分公司现有营运车辆 568台，其中各类公共汽车418台，小公汽150台；线路总长度276.5公里；日均客运量30万人次；日均运营里程7.07万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交二分公司', '02', 'BUS_COMPANY', 2, '大连公交客运集团有限公司汽车二分公司主要负责3路、7路、11路、22路、24路、26路、28路、29路、36路、408路、409路、410路、515路、551路、801路等15条线路和蔡大岭临时1、2号线路的运营管理。分公司现有营运车辆 382台，线路长度为176.8公里，日运行近5.7万公里，日客运量为 17万人次。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交三分公司', '03', 'BUS_COMPANY', 3, '大连公交客运集团有限公司汽车三分公司主要负责9路、18路、19路、20路、20路加车、21路、25路、42路、43路、45路、303路、407路、413路、413路加车、602路、932路，共计16条公共汽车线路和511路、512路、514路、519路，共计4条小公汽线路的运营管理。分公司现有营运车辆592台，其中各类公共汽车523台，小公汽69台；线路总长度250.8公里；日均客运量27.05万人次；日均运营里程7.55万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交四分公司', '04', 'BUS_COMPANY', 4, '大连公交客运集团有限公司汽车四分公司主要负责大连市1路、8路、41路、6路、33路、35路、38路、405路、414路、612路、907路、908路、909路、933路等14条公共汽车线路和513路、516路、517路、518路等4条小公汽线路的运营管理，现有运营车辆563台，其中各类公共汽车490台，小公汽73台，线路总长度263.7公里，日均载客量28.5万人次，日均运营里程7.5万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交五分公司', '05', 'BUS_COMPANY', 5, '大连公交客运集团有限公司汽车五分公司主要负责大连市2路、4路、5路、12路、17路、30路、40路、403路等8条公共汽车线路和521路、525路、526路、529路等4条小公汽线路的运营管理。分公司现有营运车辆 343台，其中各类公共汽车286台，小公汽57台；线路总长度116.85公里；日均客运量19.5万人次；日均运营里程3.9万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交六分公司', '06', 'BUS_COMPANY', 6, '大连公交客运集团有限公司汽车六分公司主要负责大连市31路、31路加车、613路、711路、801路等5条公共汽车线路和522路、522路复线、523路、528路等4条小公汽线路的运营管理。分公司现有营运车辆 316台，其中各类公共汽车235台，小公汽81台；线路总长度89.25公里；日均客运量13万人次；日均运营里程3.6万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);
+INSERT INTO T_SYS_DICT VALUES (UPPER(UUID()), '大连公交电车分公司', '07', 'BUS_COMPANY', 7, '大连公交客运集团有限公司电车分公司主要负责201路、202路2条有轨电车线路和101路无轨电车线路的运营管理，电车轨道线路设施、供变电设施的养护以及电车维修。分公司现有营运车辆 133台，其中各类有轨电车71台、各类无轨电车61台、公共汽车1台；线路总长度30.9公里；日均客运量13万人次；日均运营里程1.01万公里。', 'N', '390bbd49-087b-4ae7-a869-73d6b06445d2', CURRENT_TIMESTAMP);

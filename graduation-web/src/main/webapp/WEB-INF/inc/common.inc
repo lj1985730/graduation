@@ -32,6 +32,7 @@
 <script type="text/javascript" src="plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>
 <%-- <script type="text/javascript" src="plugins/datatables/media/js/jquery.dataTables.min.js"></script> --%>
 <%-- <script type="text/javascript" src="plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script> --%>
 <script type="text/javascript" src="scripts/global/metronic.js"></script>

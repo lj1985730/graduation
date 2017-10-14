@@ -27,7 +27,7 @@
 		<link type="text/css" rel="stylesheet" href="css/global/components.css" id="style_components" />
 		<link type="text/css" rel="stylesheet" href="css/layout.css" />
 	</head>
-	<body class="login" onkeydown="enterkeyDown(event)">
+	<body class="login" onkeydown="enterDown(event)">
 		<div class="logo">
 			<div class="form-title">
 				<span style="color: white; font-size: 55px;">公交管理系统</span>
@@ -87,7 +87,6 @@
              */
             function doLogin() {
                 var msg = $("#msg");
-                var bigmsg = $("#bigmsg");
                 var name = $("#name").val();
                 var pass = $("#pass").val();
                 if(typeof(pass) === "undefined" || $.trim(pass) === "") {
@@ -97,7 +96,7 @@
                 var rememberMe = document.getElementById("rememberMe").checked;
                 msg.html("登录中...");
                 $.ajax({
-                    type : "post",
+                    type : "POST",
                     timeout : 20000,
                     url : "login",
                     dataType : "json",
@@ -107,7 +106,7 @@
                         pass : pass,
                         rememberMe : rememberMe
                     }),
-                    success : function(data, textStatus, resp) {
+                    success : function(data) {
                         if(!data) {
                             msg.html("系统没有响应，请联系管理员。");
                             return false;
@@ -115,15 +114,13 @@
                         try {
                             if(data.message && data.message.length > 20) {
                                 msg.html(data.message);
-                                bigmsg.fadeIn("normal");
                             } else {
                                 msg.html(data.message);
                                 msg.fadeIn("normal");
                             }
                             if(data.success) {
-                                bigmsg.fadeOut("normal");
                                 if(top === window) {
-                                    top.location.href = protocol + '//' + host + "/" + context + "/home";
+                                    top.location.href = protocol + '//' + host + "/" + context + "/bus/station/home";
                                 }
                             }
                         } catch(e) {
@@ -138,7 +135,7 @@
             /**
              * 回车登录
              */
-            function enterkeyDown(e) {
+            function enterDown(e) {
                 var _key;
                 if(window.event) { //兼容IE浏览器
                     _key = e.keyCode;

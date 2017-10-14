@@ -1,10 +1,14 @@
 package com.graduation.bus.application.service;
 
+import com.graduation.authentication.entity.Account;
+import com.graduation.authentication.service.AccountService;
 import com.graduation.bus.infrastructure.entity.Station;
 import com.graduation.core.base.dto.Page;
 import com.graduation.core.base.service.BaseService;
 import com.graduation.web.util.TableParam;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
@@ -12,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +28,9 @@ import java.util.Map;
 @Service
 @Transactional
 public class StationService extends BaseService<Station> {
+
+    @Resource
+    private AccountService accountService;
 
     public Page<Station> searchPage(TableParam param, Boolean... hasTotal) {
 
@@ -55,13 +63,25 @@ public class StationService extends BaseService<Station> {
 
     @Override
     protected void beforeCreate(Station entity) {
+        Subject subject = SecurityUtils.getSubject();	//shiro主体
+        String loginName = (String)subject.getPrincipal();
+        Account account = accountService.searchByName(loginName);
+        entity.setLastModifyAccountId(account.getId());
     }
 
     @Override
     protected void beforeDelete(Station entity) {
+        Subject subject = SecurityUtils.getSubject();	//shiro主体
+        String loginName = (String)subject.getPrincipal();
+        Account account = accountService.searchByName(loginName);
+        entity.setLastModifyAccountId(account.getId());
     }
 
     @Override
     protected void beforeUpdate(Station entity) {
+        Subject subject = SecurityUtils.getSubject();	//shiro主体
+        String loginName = (String)subject.getPrincipal();
+        Account account = accountService.searchByName(loginName);
+        entity.setLastModifyAccountId(account.getId());
     }
 }

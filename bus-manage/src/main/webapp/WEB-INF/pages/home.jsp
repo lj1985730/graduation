@@ -25,6 +25,7 @@
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN PAGE TOP -->
                 <div class="page-top">
+                    <h3 class="page-title col-sm-6" style="padding: 20px; margin: 0;">线路查询</h3>
                     <!-- BEGIN TOP NAVIGATION MENU -->
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
@@ -88,10 +89,9 @@
                 <div class="page-content-wrapper">
                     <div class="page-content">
                         <!-- BEGIN PAGE HEADER-->
-                        <h3 class="page-title">线路查询</h3>
                         <div class="page-bar">
                             <div class="page-toolbar">
-                                <div class="chat-form">
+                                <div class="chat-form" style="margin-top: 0; background-color: #FFFFFF;">
                                     <div class="input-cont">
                                         <input class="form-control" type="text" placeholder="搜索公交线路"/>
                                     </div>
