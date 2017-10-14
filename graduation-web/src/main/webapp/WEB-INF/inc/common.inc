@@ -20,7 +20,7 @@
 <link type="text/css" rel="stylesheet" href="css/layout.css" />
 <link type="text/css" rel="stylesheet" href="css/themes/grey.css" />
 <link type="text/css" rel="stylesheet" href="css/custom.css" />
-
+<link type="text/css" rel="stylesheet" href="plugins/toastr/toastr.css" />
 
 <script type="text/javascript" src="plugins/jquery.min.js"></script>
 <script type="text/javascript" src="plugins/jquery-migrate.min.js"></script>
@@ -28,6 +28,7 @@
 <script type="text/javascript" src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="plugins/uniform/jquery.uniform.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="plugins/bootbox/bootbox.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table.js"></script>
@@ -37,6 +38,8 @@
 <script type="text/javascript" src="scripts/layout.js"></script>
 <script type="text/javascript" src="scripts/quick-sidebar.js"></script>
 <script type="text/javascript" src="scripts/table-formatter.js"></script>
+<script type="text/javascript" src="plugins/toastr/toastr.js"></script>
+<script type="text/javascript" src="scripts/global/sys-message.js"></script>
 
 <script>
     var rootDir = '<%=basePath%>';

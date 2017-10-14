@@ -14,7 +14,17 @@ $.fn.form = function(method, row) {
                 if(itemName) {
                     var value = row[itemName];
                     if(typeof (value) !== 'undefined') {
-                        elements[key].value = value;
+                        if(elements[key].type == 'radio') {
+                            if(elements[key].value === value.toString()) {
+                                $(elements[key]).attr('checked', true);
+                                $(elements[key]).parent().addClass('checked');
+                            } else {
+                                $(elements[key]).attr('checked', false);
+                                $(elements[key]).parent().removeClass('checked');
+                            }
+                        } else {
+                            elements[key].value = value;
+                        }
                     }
                 }
             });
@@ -57,11 +67,40 @@ $.fn.isNull = function(value) {
 $.fn.serializeJson = function() {
     var serializeObj = {};
     $(this.serializeArray()).each(function() {
-        serializeObj[this.name] = $.trim(this.value);
+        serializeObj[this.name] = dataEncode($.trim(this.value));
     });
 
     return serializeObj;
 };
+
+function dataEncode(data) {
+    var result;
+    if(typeof(data) === "object") {
+        result = htmlEncode(JSON.stringify(data));
+        result = JSON.parse(result);
+    } else if(typeof(data) === "string") {
+        result = htmlEncode(data);
+    }
+    return data;
+}
+
+function htmlEncode(str) {
+    if (str.length === 0) {
+        return "null";
+    }
+    //s = str.replace(/ /g, "&nbsp;");
+    //s = str.replace(/&/g, "&amp;");
+    var s = str.replace(/</g, "%26lt%3B");
+    s = s.replace(/%3C/g,"%26lt%3B");
+    s = s.replace(/%3c/g,"%26lt%3B");
+    s = s.replace(/>/g, "%26gt%3B");
+    s = s.replace(/%3E/g, "%26gt%3B");
+    s = s.replace(/%3e/g, "%26gt%3B");
+    //s = s.replace(/\'/g, "&#39;");
+    //s = s.replace(/\"/g, "&quot;");
+    //s = s.replace(/\n/g, "<br>");
+    return s;
+}
 
 function dataEncodeOut(data) {
     var rel = data;
@@ -70,7 +109,7 @@ function dataEncodeOut(data) {
         source = htmlEncodeOut(JSON.stringify(rel));
         source = JSON.parse(source);
         rel = source;
-    } else if(typeof(rel) == "string"){
+    } else if(typeof(rel) === "string") {
         source = htmlEncodeOut(rel);
         rel = source;
     }
@@ -191,8 +230,8 @@ var overSpanFormatter = function(value) {
  * 通用-显示序号
  * @param value 显示值
  */
-var indexFormatter = function (value) {
-    if(undefined == value){
+var indexFormatter = function (value, row, index) {
+    if(value) {
         value = index + 1;
     } else {
         value ='等待查询..';

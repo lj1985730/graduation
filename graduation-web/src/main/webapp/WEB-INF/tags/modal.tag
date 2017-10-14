@@ -6,7 +6,7 @@
 <!-- 参数 -->
 <%@ attribute name="id" required="true" rtexprvalue="false" type="java.lang.String" description="唯一标识" %>
 <%@ attribute name="title" required="true" rtexprvalue="false" type="java.lang.String" description="窗口标题" %>
-<%@ attribute name="editble" required="false" rtexprvalue="false" type="java.lang.Boolean" description="是否可保存" %>
+<%@ attribute name="editable" required="false" rtexprvalue="false" type="java.lang.Boolean" description="是否可保存" %>
 <%@ attribute name="onSave" required="false" rtexprvalue="true" type="java.lang.String" description="保存触发" %>
 <%@ attribute name="modalClass" required="false" rtexprvalue="false" type="java.lang.String" description="模态窗大小" %>
 <!-- modal-lg(大) -->
@@ -18,10 +18,10 @@
 					<i class="icon-pencil"></i>
 					<span id="${id}Title" style="font-weight:bold;">${title}</span>
 					<!-- <button type="button" class="close icon-white" data-dismiss="modal" aria-hidden="true" /> -->
-					<li class="fa fa-remove" style="float: right; color: rgb(191, 202, 209); transform: scale(1);" 
-					onmouseover="this.style.cssText='float: right; color: rgb(191, 202, 209); transform: scale(2);'" 
-					onmouseout="this.style.cssText='float: right; color: rgb(191, 202, 209); transform: scale(1);'" data-dismiss="modal"></li>	
-                </h4>
+					<span class="fa fa-remove" style="float: right; color: rgb(191, 202, 209); transform: scale(1.5);"
+					   onmouseover="this.style.cssText='float: right; color: rgb(191, 202, 209); transform: scale(2);'"
+					   onmouseout="this.style.cssText='float: right; color: rgb(191, 202, 209); transform: scale(1.5);'" data-dismiss="modal" data-target="#${id}"></span>
+				</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 标签体 -->
@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="modal-footer bg-info">
-				<c:if test="${not empty editble && editble}">
+				<c:if test="${not empty editable && editable}">
 					<c:if test="${not empty onSave}">
 						<ls:save onClick="${onSave}" />
 					</c:if>
