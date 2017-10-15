@@ -34,7 +34,7 @@ CREATE TABLE T_BUS_ROUTE (
   END_STATION_ID            CHAR(36) COMMENT '终点站',
   END_STATION_FIRST_TIME    TIME COMMENT '终点站首车时间',
   END_STATION_LAST_TIME     TIME COMMENT '终点站末车时间',
-  TICKET_PRICE              NUMERIC(3,1) COMMENT '票价',
+  TICKET_PRICE              NUMERIC(3,1) COMMENT '票价(元)',
   COMPANY_ID                CHAR(36) COMMENT '所属公司',
   REMARK                    VARCHAR(1000) COMMENT '备注',
   DELETED                   CHAR(1) NOT NULL COMMENT '是否删除',

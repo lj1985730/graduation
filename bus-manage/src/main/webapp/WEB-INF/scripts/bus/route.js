@@ -36,6 +36,42 @@
                     selectedRoute = row;
                     refreshStation();
                 },
+                onExpandRow: function (index, row, $detail) {
+                    $detail.html('<form class="form-horizontal form-bordered form-row-stripped" data-toggle="validator">\n' +
+                        '    <div class="form-group">\n' +
+                        '        <label class="control-label col-md-2">线路名称</label>\n' +
+                        '        <p class="form-control-static col-md-4">' + row.name + '</p>\n' +
+                        '        <label class="control-label col-md-2">线路分类</label>\n' +
+                        '        <p class="form-control-static col-md-4">' + (row.category ? row.category.name : '') + '</p>\n' +
+                        '    </div>\n' +
+                        '    <div class="form-group">\n' +
+                        '        <label class="control-label col-md-2">发车间隔</label>\n' +
+                        '        <p class="form-control-static col-md-4">' + row.pullInterval + '</p>\n' +
+                        '        <label class="control-label col-md-2">票价(元)</label>\n' +
+                        '        <p class="form-control-static col-md-4">' + row.ticketPrice + '</p>\n' +
+                        '    </div>\n' +
+                        '    <div class="form-group">\n' +
+                        '        <label class="control-label col-md-2">始发站</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + (row.startStation ? row.startStation.name : '') + '</p>\n' +
+                        '        <label class="control-label col-md-2">始发站首车时间</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + row.startStationFirstTimeStr + '</p>\n' +
+                        '        <label class="control-label col-md-2">始发站末车时间</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + row.startStationLastTimeStr + '</p>\n' +
+                        '    </div>\n' +
+                        '    <div class="form-group">\n' +
+                        '        <label class="control-label col-md-2">终点站</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + (row.endStation ? row.endStation.name : '') + '</p>\n' +
+                        '        <label class="control-label col-md-2">终点站首车时间</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + row.endStationFirstTimeStr + '</p>\n' +
+                        '        <label class="control-label col-md-2">终点站末车时间</label>\n' +
+                        '        <p class="form-control-static col-md-2">' + row.endStationLastTimeStr + '</p>\n' +
+                        '    </div>\n' +
+                        '    <div class="form-group">\n' +
+                        '        <label class="control-label col-md-2">备注</label>\n' +
+                    '            <p class="form-control-static col-md-10">' + row.remark + '</p>\n' +
+                        '    </div>\n' +
+                        '</form>');	//动态写入详细展示内容
+                },
                 onUncheck : function() {
                     selectedRoute = null;
                     refreshStation();

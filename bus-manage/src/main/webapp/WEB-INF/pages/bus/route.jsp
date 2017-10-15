@@ -176,9 +176,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2" for="ticketPrice">票价</label>
+        <label class="control-label col-md-2" for="ticketPrice">票价(元)</label>
         <div class="col-md-10">
-            <input id="ticketPrice" name="ticketPrice" class="form-control" placeholder="票价..." />
+            <input id="ticketPrice" name="ticketPrice" class="form-control" placeholder="票价(元)..." />
         </div>
     </div>
     <div class="form-group">

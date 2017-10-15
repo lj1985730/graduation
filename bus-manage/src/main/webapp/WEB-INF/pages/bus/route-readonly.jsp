@@ -94,7 +94,8 @@
                                     <table class="table table-striped table-bordered table-hover" id="routeTable"
                                            data-search="true" data-show-refresh="true"
                                            data-show-toggle="true" data-show-columns="true"
-                                           data-single-select="true" data-click-to-select="true">
+                                           data-single-select="true" data-click-to-select="true"
+                                           data-detail-view="true">
                                         <thead>
                                         <tr role="row" class="heading">
                                             <th data-field="checkbox" data-checkbox="true"></th>
@@ -164,9 +165,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2" for="ticketPrice">票价</label>
+        <label class="control-label col-md-2" for="ticketPrice">票价(元)</label>
         <div class="col-md-10">
-            <input id="ticketPrice" name="ticketPrice" class="form-control" placeholder="票价..." />
+            <input id="ticketPrice" name="ticketPrice" class="form-control" placeholder="票价(元)..." />
         </div>
     </div>
     <div class="form-group">
