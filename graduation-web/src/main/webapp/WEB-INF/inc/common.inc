@@ -14,6 +14,7 @@
 <link type="text/css" rel="stylesheet" href="plugins/uniform/css/uniform.default.css" />
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap-switch/bootstrap-switch.min.css" />
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap-table/bootstrap-table.css" />
+<link type="text/css" rel="stylesheet" href="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css" />
 <%-- <link type="text/css" rel="stylesheet" href="plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" /> --%>
 <link type="text/css" rel="stylesheet" href="css/global/components.css" id="style_components" />
 <link type="text/css" rel="stylesheet" href="css/global/plugins.css" />
@@ -33,6 +34,8 @@
 <script type="text/javascript" src="plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 <%-- <script type="text/javascript" src="plugins/datatables/media/js/jquery.dataTables.min.js"></script> --%>
 <%-- <script type="text/javascript" src="plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script> --%>
 <script type="text/javascript" src="scripts/global/metronic.js"></script>

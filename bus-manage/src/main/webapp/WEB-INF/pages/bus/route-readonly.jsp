@@ -43,15 +43,8 @@
                     <li class="dropdown dropdown-user">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img alt="" class="img-circle" src="img/avatar3_small.jpg"/>
-                            <span class="username username-hide-on-mobile">${sessionScope.get('userName')}</span>
+                            <span class="username username-hide-on-mobile">游客</span>
                         </a>
-                    </li>
-                    <!-- END USER LOGIN DROPDOWN -->
-                    <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                    <li class="dropdown dropdown-extended quick-sidebar-toggler" onclick="logout();">
-                        <span class="sr-only">Toggle Quick Sidebar</span>
-                        <i class="icon-logout"></i>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>
@@ -70,14 +63,14 @@
             <div class="page-sidebar navbar-collapse collapse">
                 <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                     <li class="start">
-                        <a href="javascript:toStationPage();">
+                        <a href="javascript:toHomePage();">
                             <i class="icon-pointer"></i>
-                            <span class="title">站点管理</span>
+                            <span class="title">站点查询</span>
                             <span class="selected"></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="javascript:toRoutePage();">
+                        <a href="javascript:toRouteReadonlyPage();">
                             <i class="icon-link"></i>
                             <span class="title">线路管理</span>
                             <span class="arrow "></span>
@@ -95,9 +88,6 @@
                     <div class="col-md-12">
                         <div class="portlet light">
                             <ls:title name="线路列表">
-                                <ls:add id="addRoute" />
-                                <ls:modify id="modifyRoute"/>
-                                <ls:delete id="deleteRoute" />
                             </ls:title>
                             <div class="portlet-body">
                                 <div class="table-container">
@@ -126,8 +116,6 @@
                     <div class="col-md-12">
                         <div class="portlet light">
                             <ls:title name="线路站点列表">
-                                <ls:add id="linkStation" />
-                                <ls:delete id="dislinkStation" />
                             </ls:title>
                             <div class="portlet-body">
                                 <div class="table-container">

@@ -238,3 +238,96 @@ var indexFormatter = function (value, row, index) {
     }
     return overSpanFormatter(value);
 };
+
+var toHomePage = function() {
+    window.location.href = rootDir + 'home';
+};
+
+var toRoutePage = function() {
+    window.location.href = rootDir + 'bus/route/home';
+};
+
+var toRouteReadonlyPage = function() {
+    window.location.href = rootDir + 'bus/route/readonly';
+};
+
+var toStationPage = function() {
+    window.location.href = rootDir + 'bus/station/home';
+};
+
+var logout = function() {
+    bootbox.confirm("确定要退出系统吗？", function(callback) {
+        if (callback) {
+            window.location.href = rootDir + 'logout';
+        }
+    });
+};
+
+/**
+ * 加载下拉框数据
+ * @param businessKey 业务KEY
+ * @param hasAll 类型 true 首选项为'全部'；false 首选项为'请选择'；
+ * @param initValue 初始值
+ * @param isCache 是否缓存列表
+ */
+var commonComboData = {};
+$.fn.comboData = function(businessKey, hasAll, initValue, isCache) {
+    try {
+        var combo = $(this);
+        if(combo.val() !== null) {
+            initValue = combo.val();
+        }
+        combo.empty();
+        if(hasAll) {
+            combo.append('<option value="">全部</option>');
+        } else {
+            combo.append('<option value="">请选择</option>');
+        }
+        var comboData = commonComboData[businessKey];
+        if(isCache && comboData) {
+            $.each(comboData, function(index) {
+                if(initValue === comboData[index].id) {
+                    combo.append('<option value="' + comboData[index].id + '" selected>' + comboData[index].value + '</option>');
+                } else {
+                    combo.append('<option value="' + comboData[index].id + '">' + comboData[index].value + '</option>');
+                }
+            });
+        } else {
+            $.ajax({
+                method : "GET",
+                url : rootDir + 'system/base/sysComboData/' + businessKey,
+                dataType : "json",
+                contentType : "application/json",
+                // data : JSON.stringify($editForm.serializeJson()),
+                success : function(result, status) {
+                    switch(status) {
+                        case "timeout" :
+                            SysMessage.alertError('请求超时！请稍后再次尝试。');
+                            break;
+                        case "error" :
+                            SysMessage.alertError('请求错误！请稍后再次尝试。');
+                            break;
+                        case "success" :
+                            var data = result.data;
+                            $.each(data, function(index) {
+                                if(initValue === data[index].id) {
+                                    combo.append('<option value="' + data[index].id + '" selected>' + data[index].value + '</option>');
+                                } else {
+                                    combo.append('<option value="' + data[index].id + '">' + data[index].value + '</option>');
+                                }
+                            });
+                            if(isCache) {
+                                commonComboData[businessKey] = data;
+                            }
+                            break;
+                        default:
+                            SysMessage.alertError('未知错误，请尝试刷新页面或者重新登录！');
+                            return;
+                    }
+                }
+            });
+        }
+    } catch(ex) {
+        SysMessage.alertError(ex.message);
+    }
+};

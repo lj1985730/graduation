@@ -22,10 +22,10 @@ public class Station extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户名
+	 * 名称
 	 */
-	@NotBlank(message = "用户名不能为空")
-	@Length(max = 100, message = "用户名长度不能超过100")
+	@NotBlank(message = "名称不能为空")
+	@Length(max = 100, message = "名称长度不能超过100")
 	private String name;
 
 	/**

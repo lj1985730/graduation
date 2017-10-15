@@ -5,6 +5,7 @@ package com.graduation.core.base.dao;
 
 import com.graduation.core.base.entity.BaseEntity;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -13,6 +14,8 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.hibernate.type.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -299,8 +302,8 @@ public class BaseDao {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, String>> sqlQuery(final String sql) {
 		Session session = this.getSession();
-		NativeQuery query = session.createNativeQuery(sql);
-//		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		return query.list();
 	}
 

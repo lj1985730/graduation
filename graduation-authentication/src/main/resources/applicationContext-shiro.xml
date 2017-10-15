@@ -95,10 +95,14 @@
                 /scripts/** = anon
                 /css/** = anon
                 /img/** = anon
+                /bus/home = anon
                 /bus/stations = anon
+                /bus/route/readonly = anon
+                /bus/routes = anon
+                /bus/route/*/stations = anon
                 /unauthorized.jsp = anon
                 <!-- 请求 logout地址，shiro去清除session -->
-                /logout = logout
+                /logout = anon
                 /** = user
             </value>
         </property>

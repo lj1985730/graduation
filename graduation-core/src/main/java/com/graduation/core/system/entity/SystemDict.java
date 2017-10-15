@@ -73,7 +73,7 @@ public class SystemDict extends BaseEntity {
 		this.code = code;
 	}
 
-	@Column(name = "CATEGORY")
+	@Column(name = "CATEGORY_KEY")
 	public String getCategory() {
 		return category;
 	}

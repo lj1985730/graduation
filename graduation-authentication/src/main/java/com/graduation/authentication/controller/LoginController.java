@@ -71,12 +71,13 @@ class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult doLogin(@RequestBody Map<String, String> userMap, HttpServletRequest request, HttpServletResponse response) {
+	public JsonResult doLogin(@RequestBody Map<String, String> userMap) {
 
 		Subject subject = SecurityUtils.getSubject();	//shiro主体
 		UsernamePasswordToken token = new UsernamePasswordToken(userMap.get("name"), userMap.get("pass"));
 		try {
 			subject.login(token);
+			subject.getSession().setAttribute("userName", userMap.get("name"));
 		} catch (IncorrectCredentialsException ice) {
 			throw new BusinessException("密码错误！", ice);
 		}
@@ -145,11 +146,10 @@ class LoginController extends BaseController {
 	 * @return 重定向登录页
 	 */
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
-	public String logout(HttpServletRequest request) {
-
-        request.getSession().invalidate();	//清除session
-
-		return redirectPageView("/loginView");
+	public String logout() {
+		Subject subject = SecurityUtils.getSubject();	//shiro主体
+		subject.logout();
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = { "/top" })

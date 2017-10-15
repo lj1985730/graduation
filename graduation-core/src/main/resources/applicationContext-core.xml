@@ -15,7 +15,10 @@
     <!-- 注入DAO -->
     <bean id="dao" class="com.graduation.core.base.dao.BaseDao" />
 
+    <!-- <context:component-scan base-package="com.graduation.core.**.controller" />-->
+
     <bean id="systemConfigService" class="com.graduation.core.system.service.SystemConfigService" />
+    <!--<bean id="systemComboDataService" class="com.graduation.core.system.service.SystemComboDataService" />-->
     <bean id="systemLoader" class="com.graduation.core.system.service.SystemLoader" destroy-method="shutdown" lazy-init="false" />
 
     <!-- 初始化bean上下文帮助类 -->

@@ -95,13 +95,13 @@
                             if(data.message) {
                                 SysMessage.alertSuccess(data.message);
                             }
+                            $editWin.modal("hide");
+                            $table.bootstrapTable('refresh');
                         } else {
                             if(data.message) {
                                 SysMessage.alertInfo(data.message);
                             }
                         }
-                        $editWin.modal("hide");
-                        $table.bootstrapTable('refresh');
                         break;
                     default:
                         SysMessage.alertError('未知错误，请尝试刷新页面或者重新登录！');

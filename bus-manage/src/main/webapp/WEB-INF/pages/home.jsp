@@ -25,7 +25,7 @@
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN PAGE TOP -->
                 <div class="page-top">
-                    <h3 class="page-title col-sm-6" style="padding: 20px; margin: 0;">线路查询</h3>
+                    <h3 class="page-title col-sm-6" style="padding: 20px; margin: 0;">站点查询</h3>
                     <!-- BEGIN TOP NAVIGATION MENU -->
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
@@ -34,15 +34,8 @@
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle" src="img/avatar3_small.jpg"/>
-                                    <span class="username username-hide-on-mobile">Nick </span>
+                                    <span class="username username-hide-on-mobile">游客</span>
                                 </a>
-                            </li>
-                            <!-- END USER LOGIN DROPDOWN -->
-                            <!-- BEGIN USER LOGIN DROPDOWN -->
-                            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                            <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                                <span class="sr-only">Toggle Quick Sidebar</span>
-                                <i class="icon-logout"></i>
                             </li>
                             <!-- END USER LOGIN DROPDOWN -->
                         </ul>
@@ -61,17 +54,17 @@
                     <div class="page-sidebar navbar-collapse collapse">
                         <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                             <li class="start active ">
-                                <a href="javascript:">
-                                    <i class="icon-link"></i>
-                                    <span class="title">线路查询</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:">
+                                <a href="javascript:toHomePage();">
                                     <i class="icon-pointer"></i>
                                     <span class="title">站点查询</span>
                                     <span class="arrow "></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:toRouteReadonlyPage();">
+                                    <i class="icon-link"></i>
+                                    <span class="title">线路查询</span>
+                                    <span class="selected"></span>
                                 </a>
                             </li>
                             <li class="last">
