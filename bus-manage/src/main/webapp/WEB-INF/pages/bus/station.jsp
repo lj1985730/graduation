@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <ls:modal id="editWin" title="" editable="true" onSave="$.fn.submitEditForm()"><!-- 默认保存方法为lsGridSave,自定义可声明onSave事件 -->
+        <ls:modal id="editWin" modalClass="modal-lg" title="" editable="true" onSave="$.fn.submitEditForm()"><!-- 默认保存方法为lsGridSave,自定义可声明onSave事件 -->
             <form id="editForm" class="form-horizontal form-bordered form-row-stripped" data-toggle="validator">
                 <input class="switch" id="id" name="id" type="hidden" />
                 <div class="form-group">
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">站点位置</label>
+                    <label class="control-label col-md-2">状态</label>
                     <div class="col-md-10">
                         <label class="radio-inline">
                             <input type="radio" name="enabled" value="true" checked> 启用
