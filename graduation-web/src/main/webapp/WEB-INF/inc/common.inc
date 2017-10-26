@@ -22,6 +22,8 @@
 <link type="text/css" rel="stylesheet" href="css/themes/grey.css" />
 <link type="text/css" rel="stylesheet" href="css/custom.css" />
 <link type="text/css" rel="stylesheet" href="plugins/toastr/toastr.css" />
+<link type="text/css" rel="stylesheet" href="plugins/select2/css/select2.css" />
+<link type="text/css" rel="stylesheet" href="plugins/select2/css/select2-bootstrap.css" />
 
 <script type="text/javascript" src="plugins/jquery.min.js"></script>
 <script type="text/javascript" src="plugins/jquery-migrate.min.js"></script>
@@ -36,14 +38,38 @@
 <script type="text/javascript" src="plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
-<%-- <script type="text/javascript" src="plugins/datatables/media/js/jquery.dataTables.min.js"></script> --%>
-<%-- <script type="text/javascript" src="plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script> --%>
 <script type="text/javascript" src="scripts/global/metronic.js"></script>
 <script type="text/javascript" src="scripts/layout.js"></script>
 <script type="text/javascript" src="scripts/quick-sidebar.js"></script>
 <script type="text/javascript" src="scripts/table-formatter.js"></script>
 <script type="text/javascript" src="plugins/toastr/toastr.js"></script>
 <script type="text/javascript" src="scripts/global/sys-message.js"></script>
+<script type="text/javascript" src="plugins/select2/js/select2.js"></script>
+<script type="text/javascript" src="plugins/select2/js/i18n/zh-CN.js"></script>
+
+<style>
+    .select2-container {
+        width: 100% !important;
+        padding: 0;
+    }
+    .select2-container--open {
+        z-index: 9999999;
+    }
+    <%--
+    .select2-container--default .select2-selection--single {
+        height: 34px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        height: 32px;
+        line-height: 20px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 32px;
+    }
+    --%>
+</style>
 
 <script>
     var rootDir = '<%=basePath%>';
@@ -51,4 +77,5 @@
         Metronic.init(); // init metronic core components
         Layout.init(); // init current layout
     });
+    $.fn.modal.Constructor.prototype.enforceFocus =function(){};    //select2 modal bug fix
 </script>

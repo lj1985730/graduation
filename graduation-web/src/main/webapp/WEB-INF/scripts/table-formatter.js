@@ -331,6 +331,7 @@ $.fn.comboData = function(businessKey, hasAll, initValue, isCache) {
                 }
             });
         }
+        combo.select2({theme: "bootstrap"});
     } catch(ex) {
         SysMessage.alertError(ex.message);
     }

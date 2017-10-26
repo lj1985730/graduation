@@ -10,7 +10,7 @@
 <%@ attribute name="onSave" required="false" rtexprvalue="true" type="java.lang.String" description="保存触发" %>
 <%@ attribute name="modalClass" required="false" rtexprvalue="false" type="java.lang.String" description="模态窗大小" %>
 <!-- modal-lg(大) -->
-<div id="${id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<div id="${id}" class="modal fade" role="dialog" data-backdrop="static">
 	<div class="${modalClass} modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-primary">
