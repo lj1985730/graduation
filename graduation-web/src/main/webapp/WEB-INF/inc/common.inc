@@ -48,11 +48,11 @@
 <script type="text/javascript" src="plugins/select2/js/i18n/zh-CN.js"></script>
 
 <style>
-    .select2-container {
+    .select2-container {    //select2 modal bug fix
         width: 100% !important;
         padding: 0;
     }
-    .select2-container--open {
+    .select2-container--open {    //select2 modal bug fix
         z-index: 9999999;
     }
     <%--
