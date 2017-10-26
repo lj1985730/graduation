@@ -73,14 +73,21 @@
                         <a href="javascript:toStationPage();">
                             <i class="icon-pointer"></i>
                             <span class="title">站点管理</span>
-                            <span class="selected"></span>
+                            <span class="arrow"></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="javascript:toRoutePage();">
-                            <i class="icon-link"></i>
+                            <i class="icon-graph"></i>
                             <span class="title">线路管理</span>
-                            <span class="arrow "></span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:toStationDistancePage();">
+                            <i class="icon-cursor-move"></i>
+                            <span class="title">站点距离管理</span>
+                            <span class="arrow"></span>
                         </a>
                     </li>
                 </ul>

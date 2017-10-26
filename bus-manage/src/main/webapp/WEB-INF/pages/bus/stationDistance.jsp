@@ -1,18 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  User: LiuJun
+  User: Liu Jun
   Date: 2017/10/14
   Time: 19:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="ls" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
     <head>
         <%@ include file="/WEB-INF/inc/common.inc" %>
-        <script type="text/javascript" src="scripts/bus/station.js"></script>
+        <script type="text/javascript" src="scripts/bus/stationDistance.js"></script>
     </head>
     <body class="page-boxed page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
         <!-- BEGIN HEADER -->
@@ -68,12 +68,12 @@
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar-wrapper">
                     <div class="page-sidebar navbar-collapse collapse">
-                        <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                            <li class="start active">
+                        <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                            <li class="start">
                                 <a href="javascript:toStationPage();">
                                     <i class="icon-pointer"></i>
                                     <span class="title">站点管理</span>
-                                    <span class="selected"></span>
+                                    <span class="arrow"></span>
                                 </a>
                             </li>
                             <li>
@@ -83,11 +83,11 @@
                                     <span class="arrow"></span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="javascript:toStationDistancePage();">
                                     <i class="icon-cursor-move"></i>
                                     <span class="title">站点距离管理</span>
-                                    <span class="arrow"></span>
+                                    <span class="selected"></span>
                                 </a>
                             </li>
                         </ul>
@@ -101,14 +101,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="portlet light">
-                                    <ls:title name="站点列表">
-                                        <ls:add id="addStation" />
-                                        <ls:modify id="modifyStation"/>
-                                        <ls:delete id="deleteStation" />
+                                    <ls:title name="站点距离列表">
+                                        <ls:add id="addStationDistance" />
+                                        <ls:modify id="modifyStationDistance"/>
+                                        <ls:delete id="deleteStationDistance" />
                                     </ls:title>
                                     <div class="portlet-body">
                                         <div class="table-container">
-                                            <table class="table table-striped table-bordered table-hover" id="stationTable"
+                                            <table class="table table-striped table-bordered table-hover" id="stationDistanceTable"
                                                    data-search="true" data-show-refresh="true"
                                                    data-show-toggle="true" data-show-columns="true"
                                                    data-single-select="true" data-click-to-select="true">
@@ -116,9 +116,10 @@
                                                     <tr role="row" class="heading">
                                                         <th data-field="checkbox" data-checkbox="true"></th>
                                                         <th data-field="id" data-formatter="indexFormatter">序号</th>
-                                                        <th data-field="name" data-sortable="true">站点名称</th>
-                                                        <th data-field="location">站点地址</th>
-                                                        <th data-field="remark">备注</th>
+                                                        <th data-field="stationA.name" data-sortable="true">起点站名称</th>
+                                                        <th data-field="stationB.name">终点站名称</th>
+                                                        <th data-field="distance">距离（公里）</th>
+                                                        <th data-field="useTime">用时（分钟）</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -136,32 +137,27 @@
             <form id="editForm" class="form-horizontal form-bordered form-row-stripped" data-toggle="validator">
                 <input class="switch" id="id" name="id" type="hidden" />
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="name"><span class="required">* </span>站点名称</label>
+                    <label class="control-label col-md-2" for="stationA"><span class="required">* </span>起点站</label>
                     <div class="col-md-10">
-                        <input id="name" name="name" class="form-control" placeholder="站点名称..." />
+                        <select id="stationA" name="stationAId" class="form-control"></select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">站点位置</label>
+                    <label class="control-label col-md-2" for="stationB"><span class="required">* </span>终点站</label>
                     <div class="col-md-10">
-                        <input id="location" name="location" type="text" class="form-control" placeholder="站点位置..." />
+                        <select id="stationB" name="stationBId" class="form-control"></select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">状态</label>
+                    <label class="control-label col-md-2" for="distance"><span class="required">* </span>距离（公里）</label>
                     <div class="col-md-10">
-                        <label class="radio-inline">
-                            <input type="radio" name="enabled" value="true" checked> 启用
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="enabled" value="false"> 停用
-                        </label>
+                        <input id="distance" name="distance" type="text" class="form-control" placeholder="距离..." />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">备注</label>
+                    <label class="control-label col-md-2"for="useTime"><span class="required">* </span>用时（分钟）</label>
                     <div class="col-md-10">
-                        <textarea id="remark" name="remark" class="form-control" rows="3" placeholder="备注..."></textarea>
+                        <input id="useTime" name="useTime" type="text" class="form-control" placeholder="用时..." />
                     </div>
                 </div>
             </form>

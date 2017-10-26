@@ -71,8 +71,17 @@ public class RouteService extends BaseService<Route> {
         }
 
         DetachedCriteria criteria = DetachedCriteria.forClass(RouteStation.class);	//构造DetachedCriteria对象
+
+        criteria.createAlias("station", "station");
         criteria.add(Restrictions.eq(BaseService.DELETE_PARAM, false));
         criteria.add(Restrictions.eq("routeId", routeId));
+
+        if(StringUtils.isNotBlank(param.getSearch())) {
+            Disjunction disjunction = Restrictions.disjunction();
+            disjunction.add(Restrictions.like("station.name", param.getSearch(), MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+        }
+
         criteria.addOrder(Order.asc("sort"));
 
         // 创建分页对象

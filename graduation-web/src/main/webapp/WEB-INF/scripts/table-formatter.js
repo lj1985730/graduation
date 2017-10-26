@@ -255,6 +255,10 @@ var toStationPage = function() {
     window.location.href = rootDir + 'bus/station/home';
 };
 
+var toStationDistancePage = function() {
+    window.location.href = rootDir + 'bus/stationDistance/home';
+};
+
 var logout = function() {
     bootbox.confirm("确定要退出系统吗？", function(callback) {
         if (callback) {
