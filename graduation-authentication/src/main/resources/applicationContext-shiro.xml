@@ -128,7 +128,7 @@
          <mvc:exclude-mapping path="/css/**"/>
          <mvc:exclude-mapping path="/images/**"/>
 
-         <bean class="com.graduation.authentication.util.AuthenticationInterceptor" />
+         <bean class="com.graduation.authentication.utils.AuthenticationInterceptor" />
       </mvc:interceptor>
    </mvc:interceptors>-->
 

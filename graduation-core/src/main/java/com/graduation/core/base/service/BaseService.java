@@ -233,7 +233,7 @@ public abstract class BaseService<E extends BaseEntity> {
      * @return 数据对象
      */
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public E get(Serializable id) {
+    public E searchById(Serializable id) {
 		return dao.get(entityClass, id);
     }
 
@@ -274,7 +274,7 @@ public abstract class BaseService<E extends BaseEntity> {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(String id) {
-		E entity = get(id);
+		E entity = searchById(id);
 		delete(entity);
 	}
 

@@ -2,7 +2,7 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.Menu;
 import com.graduation.authentication.entity.QuickMenu;
-import com.graduation.authentication.util.AuthenticationUtil;
+import com.graduation.authentication.util.AuthenticationUtils;
 import com.graduation.core.base.service.BaseService;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -48,7 +48,7 @@ public class QuickMenuService extends BaseService<QuickMenu> {
 		//取快速访问页面
 		DetachedCriteria criteria = DetachedCriteria.forClass(QuickMenu.class);
 		criteria.add(Restrictions.eq(DELETE_PARAM, false));
-		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
+		criteria.add(Restrictions.eq("accountId", AuthenticationUtils.getInfo(AuthenticationUtils.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.addOrder(Order.desc("lastModifyTime"));	//默认操作时间倒序
 		return this.searchByCriteria(criteria);
 	}
@@ -85,7 +85,7 @@ public class QuickMenuService extends BaseService<QuickMenu> {
 	 */
 	public void delete(Serializable id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(QuickMenu.class);
-		criteria.add(Restrictions.eq("accountId", AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString()));
+		criteria.add(Restrictions.eq("accountId", AuthenticationUtils.getInfo(AuthenticationUtils.LoginInfo.ACCOUNT_ID).toString()));
 		criteria.add(Restrictions.eq("menuId", id));
 		List<QuickMenu> quickModules = this.searchByCriteria(criteria);
 
@@ -101,7 +101,7 @@ public class QuickMenuService extends BaseService<QuickMenu> {
 
 	@Override
 	public void beforeCreate(QuickMenu entity) {
-		entity.setAccountId(AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString());
+		entity.setAccountId(AuthenticationUtils.getInfo(AuthenticationUtils.LoginInfo.ACCOUNT_ID).toString());
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * Cookie工具集，解码出存储的信息。
@@ -14,11 +16,11 @@ import javax.servlet.http.HttpServletResponse;
  * 1.登陆后获得验证通过，形成cookie。
  * 2.每次请求比对时间，默认20分钟，如果超时，则进行数据库查询，比对是否选择了记住。
  * 3.如果选择记住，则自动完成登陆。如果没有，则认为掉线。
- * @author 孙伟
+ * @author Liu Jun
  */
-public class CookieUtil {
+public class CookieUtils {
 
-	private static Logger logger = LoggerFactory.getLogger(CookieUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(CookieUtils.class);
 
 	/**
 	 * 用户自定义模板相对路径键
@@ -45,6 +47,23 @@ public class CookieUtil {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 根据名称获取request中的cookie
+	 * @param request 请求体
+	 * @return cookie
+	 */
+	public static String getCookieValue(HttpServletRequest request, String cookieName) {
+		Cookie cookie = getCookie(request, cookieName);
+		if(cookie == null) {
+			return null;
+		}
+		try {
+			return URLDecoder.decode(cookie.getValue(), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

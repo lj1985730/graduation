@@ -15,6 +15,11 @@ public class TableParam implements Serializable {
     private String order;   //正排or倒排
 
     /**
+     * default 构造器
+     */
+    public TableParam() {}
+
+    /**
      * 构造器，根据request获取参数
      * @param request 请求体
      */

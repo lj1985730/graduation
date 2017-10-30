@@ -46,31 +46,6 @@
 <script type="text/javascript" src="scripts/global/sys-message.js"></script>
 <script type="text/javascript" src="plugins/select2/js/select2.js"></script>
 <script type="text/javascript" src="plugins/select2/js/i18n/zh-CN.js"></script>
-
-<style>
-    .select2-container {    //select2 modal bug fix
-        width: 100% !important;
-        padding: 0;
-    }
-    .select2-container--open {    //select2 modal bug fix
-        z-index: 9999999;
-    }
-    <%--
-    .select2-container--default .select2-selection--single {
-        height: 34px;
-    }
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        padding-top: 6px;
-        padding-bottom: 6px;
-        height: 32px;
-        line-height: 20px;
-    }
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 32px;
-    }
-    --%>
-</style>
-
 <script>
     var rootDir = '<%=basePath%>';
     $(document).ready(function() {

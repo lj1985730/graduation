@@ -52,7 +52,7 @@ class ModuleController extends BaseController {
 	@RequestMapping(value = { "/{id}" })
 	@ResponseBody
 	public JsonResult load(@PathVariable("id") String id) {
-		return new JsonResult(service.get(id));
+		return new JsonResult(service.searchById(id));
 	}
 
 	/**

@@ -17,7 +17,7 @@ import java.util.List;
  * @author liu jun
  * @version 2016-7-31 15:23:42
  */
-public class AuthenticationUtil {
+public class AuthenticationUtils {
 
     /**
      * 密码加密方式

@@ -1,19 +1,23 @@
 package com.graduation.core.base.util;
 
-import java.io.IOException;
-
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 
+import java.io.IOException;
+
 /**
  * Spring运行环境帮助类
  * @author Liu Jun
- *
  */
-public class SpringContextUtil implements ApplicationContextAware {
+public class SpringContextUtils implements ApplicationContextAware {
+
+	private static Logger logger = LoggerFactory.getLogger(SpringContextUtils.class);
 
     /**
      * Spring上下文.
@@ -25,10 +29,11 @@ public class SpringContextUtil implements ApplicationContextAware {
      * @param applicationContext Spring上下文
      */
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		SpringContextUtil.applicationContext = applicationContext;
+		SpringContextUtils.applicationContext = applicationContext;
 	}
 
 	public static ApplicationContext getApplicationContext() {
+		assertContextInjected();
 		return applicationContext;
 	}
 
@@ -37,19 +42,20 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @param name bean名字
 	 * @return bean
 	 */
-	public static Object getBean(String name) throws BeansException {
-		return applicationContext.getBean(name);
+	@SuppressWarnings("unchecked")
+	public static <T> T getBean(String name) throws BeansException {
+		assertContextInjected();
+		return (T)applicationContext.getBean(name);
 	}
-
 
 	/**
 	 * 根据指定的类型获取bean
-	 * @param name 类型名
 	 * @param requiredType 类型
 	 * @return bean
 	 */
-	public static <T> T getBean(String name, Class<T> requiredType) throws BeansException {
-		return applicationContext.getBean(name, requiredType);
+	public static <T> T getBean(Class<T> requiredType) throws BeansException {
+		assertContextInjected();
+		return applicationContext.getBean(requiredType);
 	}
 
 	/**
@@ -58,6 +64,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @return 给定bean是否存在
 	 */
 	public static boolean containsBean(String name) {
+		assertContextInjected();
 		return applicationContext.containsBean(name);
 	}
 
@@ -67,6 +74,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @return 是否是单例
 	 */
 	public static boolean isSingleton(String name) throws NoSuchBeanDefinitionException {
+		assertContextInjected();
 		return applicationContext.isSingleton(name);
 	}
 
@@ -75,8 +83,10 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @param name Spring bean对象名
 	 * @return bean类型
 	 */
-	public static <T> Class<?> getType(String name) throws NoSuchBeanDefinitionException {
-		return applicationContext.getType(name);
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> getType(String name) throws NoSuchBeanDefinitionException {
+		assertContextInjected();
+		return (Class<T>)applicationContext.getType(name);
 	}
 
 	/**
@@ -85,6 +95,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @return Spring别名
 	 */
 	public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
+		assertContextInjected();
 		return applicationContext.getAliases(name);
 	}
 	
@@ -94,6 +105,24 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 * @return 上下文的资源文件
 	 */
 	public static Resource getResource(String path) throws IOException {
+		assertContextInjected();
 		return applicationContext.getResource(path);
+	}
+
+	/**
+	 * 检查ApplicationContext不为空.
+	 */
+	private static void assertContextInjected() {
+		Validate.validState(applicationContext != null, "applicationContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+	}
+
+	/**
+	 * 清除SpringContextHolder中的ApplicationContext为Null.
+	 */
+	public static void clearHolder() {
+		if (logger.isDebugEnabled()){
+			logger.debug("清除SpringContextUtils中的ApplicationContext:" + applicationContext);
+		}
+		applicationContext = null;
 	}
 }

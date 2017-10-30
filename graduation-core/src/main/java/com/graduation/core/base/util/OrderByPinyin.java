@@ -15,8 +15,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.CriteriaQuery;  
 import org.hibernate.criterion.Order;  
 import org.hibernate.engine.spi.SessionFactoryImplementor; 
-import org.hibernate.type.Type;  
+import org.hibernate.type.Type;
 
+/**
+ * 拼音排序
+ */
 public class OrderByPinyin extends Order {  
     private String encoding = "GBK";  
     private boolean ascending;  

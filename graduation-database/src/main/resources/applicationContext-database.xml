@@ -4,24 +4,96 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-lazy-init="true">
 
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <!-- 记录运行慢的SQL -->
+        <property name="logSlowSql" value="true" />
+        <!-- 10秒 -->
+        <property name="slowSqlMillis" value="10000" />
+
+        <!--
+            合并SQL
+            select * from t where id = 1
+            select * from t where id = 2
+            select * from t where id = 3
+            合并为：
+            select * from t where id = ?
+        -->
+        <property name="mergeSql" value="true" />
+    </bean>
+
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="statementExecutableSqlLogEnable" value="false" />
+    </bean>
+
+    <!-- spring 拦截器 -->
+    <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+
+    <bean id="druid-type-proxyCreator" class="com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator">
+        <!-- 所有ABCInterface的派生类被拦截监控  -->
+        <property name="targetBeanType" value="com.graduation.core.base.dao.BaseDao" />
+        <property name="interceptorNames">
+            <list>
+                <value>druid-stat-interceptor</value>
+            </list>
+        </property>
+    </bean>
+
+<!--    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="proxyTargetClass" value="true" />
+        <property name="beanNames">
+            <list>
+                <value>baseDao</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>druid-stat-interceptor</value>
+            </list>
+        </property>
+    </bean>-->
+
     <!-- c3p0连接池配置 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${db.driverClass}"/>
-        <property name="jdbcUrl" value="${db.url}"/>
-        <property name="user" value="${db.username}"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClass}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
-        <property name="maxPoolSize" value="${db.maxConnectionCount}"/>
-        <property name="minPoolSize" value="${db.minConnectionCount}"/>
-        <property name="initialPoolSize" value="2"/>
-        <property name="maxIdleTime" value="60"/>
-        <property name="checkoutTimeout" value="0"/>
-        <property name="acquireIncrement" value="2"/>
-        <property name="acquireRetryAttempts" value="0"/>
-        <property name="acquireRetryDelay" value="1000" />
-        <property name="autoCommitOnClose" value="false"/>
-        <property name="preferredTestQuery" value="SELECT 1 FROM SYS_CONFIG"/>
-        <property name="breakAfterAcquireFailure" value="false"/>
-        <property name="idleConnectionTestPeriod" value="40"/>
-        <property name="maxStatements" value="70"/>
+        <property name="proxyFilters">
+            <list>
+                <!-- 配置监控统计拦截的filter -->
+                <ref bean="stat-filter" />
+                <!-- 配置日志的filter -->
+                <ref bean="log-filter" />
+            </list>
+        </property>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${db.initialSize}" />
+        <property name="minIdle" value="${db.minIdle}" />
+        <property name="maxActive" value="${db.maxActive}" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <!-- 检测脚本 -->
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!--
+            打开PSCache，并且指定每个连接上PSCache的大小。
+            如果用Oracle，则把poolPreparedStatements配置为true
+            mysql可以配置为false。分库分表较多的数据库，建议配置为false
+        -->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
     </bean>
 </beans>

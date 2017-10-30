@@ -83,7 +83,7 @@ class LoginController extends BaseController {
 		}
 
 //		//login step 1: load user.
-//		Account account = accountService.valid(userMap.get("name"), userMap.get("pass"));
+//		Account account = accountService.valid(userMap.searchById("name"), userMap.searchById("pass"));
 //
 //		//login step 2: valid user.
 //		service.validLoginAuth(account);

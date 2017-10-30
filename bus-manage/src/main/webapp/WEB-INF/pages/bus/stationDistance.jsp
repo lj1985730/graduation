@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@ include file="/WEB-INF/inc/common.inc" %>
+        <%@ include file="/WEB-INF/includes/common.inc" %>
         <script type="text/javascript" src="scripts/bus/stationDistance.js"></script>
     </head>
     <body class="page-boxed page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -139,13 +139,13 @@
                 <div class="form-group">
                     <label class="control-label col-md-2" for="stationA"><span class="required">* </span>起点站</label>
                     <div class="col-md-10">
-                        <select id="stationA" name="stationAId" class="form-control"></select>
+                        <select id="stationA" name="stationAId" class="form-control" style="width: 100%;"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2" for="stationB"><span class="required">* </span>终点站</label>
                     <div class="col-md-10">
-                        <select id="stationB" name="stationBId" class="form-control"></select>
+                        <select id="stationB" name="stationBId" class="form-control" style="width: 100%;"></select>
                     </div>
                 </div>
                 <div class="form-group">

@@ -14,14 +14,16 @@ $.fn.form = function(method, row) {
                 if(itemName) {
                     var value = row[itemName];
                     if(typeof (value) !== 'undefined') {
-                        if(elements[key].type == 'radio') {
-                            if(elements[key].value === value.toString()) {
+                        if(elements[key].type === 'radio') {
+                            if (elements[key].value === value.toString()) {
                                 $(elements[key]).attr('checked', true);
                                 $(elements[key]).parent().addClass('checked');
                             } else {
                                 $(elements[key]).attr('checked', false);
                                 $(elements[key]).parent().removeClass('checked');
                             }
+                        } else if(elements[key].type.indexOf('select') !== -1) {
+                            $(elements[key]).val(value).trigger('change');    //select2 initial data
                         } else {
                             elements[key].value = value;
                         }
@@ -35,7 +37,7 @@ $.fn.form = function(method, row) {
             $('select', this).find('option:first').prop('selected', true);	//处理select,选中第一项
         }
     } catch(ex) {
-        Metronic.alert({ message : ex.message, type : 'danger', closeInSeconds : 5 });
+        SysMessage.alertError(ex.message);
     }
 };
 
@@ -117,7 +119,7 @@ function dataEncodeOut(data) {
 }
 
 function htmlEncodeOut (str) {
-    if (str.length == 0) {
+    if (str.length === 0) {
         return "";
     }
     //s = str.replace(/ /g, "&nbsp;");
@@ -277,23 +279,27 @@ var logout = function() {
 var commonComboData = {};
 $.fn.comboData = function(businessKey, hasAll, initValue, isCache) {
     try {
-        var combo = $(this);
-        if(combo.val() !== null) {
-            initValue = combo.val();
+        var $this = $(this);
+        if($this.val() !== null) {
+            initValue = $this.val();
         }
-        combo.empty();
+        $this.select2({
+            theme : "bootstrap"
+        });
+        $this.empty();
         if(hasAll) {
-            combo.append('<option value="">全部</option>');
+            $this.append('<option value="">全部</option>');
         } else {
-            combo.append('<option value="">请选择</option>');
+            $this.append('<option value="">请选择</option>');
         }
         var comboData = commonComboData[businessKey];
         if(isCache && comboData) {
             $.each(comboData, function(index) {
                 if(initValue === comboData[index].id) {
-                    combo.append('<option value="' + comboData[index].id + '" selected>' + comboData[index].value + '</option>');
+                    $this.append('<option value="' + comboData[index].id + '" selected>' + comboData[index].value + '</option>');
+                    $this.val(comboData[index].id).trigger('change');  //select2 use it
                 } else {
-                    combo.append('<option value="' + comboData[index].id + '">' + comboData[index].value + '</option>');
+                    $this.append('<option value="' + comboData[index].id + '">' + comboData[index].value + '</option>');
                 }
             });
         } else {
@@ -315,9 +321,10 @@ $.fn.comboData = function(businessKey, hasAll, initValue, isCache) {
                             var data = result.data;
                             $.each(data, function(index) {
                                 if(initValue === data[index].id) {
-                                    combo.append('<option value="' + data[index].id + '" selected>' + data[index].value + '</option>');
+                                    $this.append('<option value="' + data[index].id + '" selected>' + data[index].value + '</option>');
+                                    $this.val(data[index].id).trigger('change');  //select2 use it
                                 } else {
-                                    combo.append('<option value="' + data[index].id + '">' + data[index].value + '</option>');
+                                    $this.append('<option value="' + data[index].id + '">' + data[index].value + '</option>');
                                 }
                             });
                             if(isCache) {
@@ -331,7 +338,6 @@ $.fn.comboData = function(businessKey, hasAll, initValue, isCache) {
                 }
             });
         }
-        combo.select2({theme: "bootstrap"});
     } catch(ex) {
         SysMessage.alertError(ex.message);
     }

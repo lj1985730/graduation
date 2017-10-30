@@ -21,6 +21,6 @@ public class AuthenticationRealm extends AuthenticatingRealm {
             throw new UnknownAccountException("用户不存在！");
         }
 
-        return new SimpleAuthenticationInfo(loginName, account.getPassword(), ByteSource.Util.bytes(AuthenticationUtil.PASS_SALT), getName());
+        return new SimpleAuthenticationInfo(loginName, account.getPassword(), ByteSource.Util.bytes(AuthenticationUtils.PASS_SALT), getName());
     }
 }

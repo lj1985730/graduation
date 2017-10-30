@@ -4,7 +4,7 @@ import com.graduation.authentication.entity.Account;
 import com.graduation.authentication.service.AccountRoleService;
 import com.graduation.authentication.service.AccountService;
 import com.graduation.authentication.service.DepartmentService;
-import com.graduation.authentication.util.AuthenticationUtil;
+import com.graduation.authentication.util.AuthenticationUtils;
 import com.graduation.core.base.controller.BaseController;
 import com.graduation.core.base.dto.JsonResult;
 import com.graduation.core.base.service.BaseService;
@@ -101,7 +101,7 @@ class AccountController extends BaseController {
 	@RequestMapping(value = { "/currentName" })
 	@ResponseBody
 	public JsonResult searchCurrentName() {
-		return new JsonResult(AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.PERSON_NAME));
+		return new JsonResult(AuthenticationUtils.getInfo(AuthenticationUtils.LoginInfo.PERSON_NAME));
 	}
 
 	/**
@@ -122,7 +122,7 @@ class AccountController extends BaseController {
 	@RequestMapping(value = { "/" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public JsonResult modify(@RequestBody Account account) {
-		Account oldAccount = service.get(account.getId());
+		Account oldAccount = service.searchById(account.getId());
 		oldAccount.setName(account.getName());
 		service.update(oldAccount);
 		return new JsonResult(JsonResult.UPDATE_SUCCEED);

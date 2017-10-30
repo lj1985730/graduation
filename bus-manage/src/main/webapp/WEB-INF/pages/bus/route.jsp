@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="/WEB-INF/inc/common.inc" %>
+    <%@ include file="/WEB-INF/includes/common.inc" %>
     <script type="text/javascript" src="scripts/bus/route.js"></script>
 </head>
 <body class="page-boxed page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -173,7 +173,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="category"><span class="required">* </span>线路分类</label>
         <div class="col-md-10">
-            <select id="category" name="categoryId" class="form-control"></select>
+            <select id="category" name="categoryId" class="form-control" style="width: 100%;"></select>
         </div>
     </div>
     <div class="form-group">
@@ -191,7 +191,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="startStation"><span class="required">* </span>始发站</label>
         <div class="col-md-10">
-            <select id="startStation" name="startStationId" class="form-control"></select>
+            <select id="startStation" name="startStationId" class="form-control" style="width: 100%;"></select>
         </div>
     </div>
     <div class="form-group">
@@ -209,7 +209,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="endStation"><span class="required">* </span>终点站</label>
         <div class="col-md-10">
-            <select id="endStation" name="endStationId" class="form-control"></select>
+            <select id="endStation" name="endStationId" class="form-control" style="width: 100%;"></select>
         </div>
     </div>
     <div class="form-group">
@@ -244,7 +244,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="link_station"><span class="required">* </span>站点</label>
         <div class="col-md-10">
-            <select id="link_station" class="form-control"></select>
+            <select id="link_station" class="form-control" style="width: 100%;"></select>
         </div>
     </div>
     <div class="form-group">

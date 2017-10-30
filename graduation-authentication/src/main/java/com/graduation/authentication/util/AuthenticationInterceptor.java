@@ -1,7 +1,7 @@
 package com.graduation.authentication.util;
 
 import com.graduation.core.base.dto.JsonResult;
-import com.graduation.web.util.CookieUtil;
+import com.graduation.web.util.CookieUtils;
 import com.graduation.web.util.HttpErrorCode;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
 		String requestUri = request.getRequestURI();	//检查菜单权限
 		if(requestUri.endsWith("/homeView")) {	//检验用户是否有请求页面的权限
-			String[] authMenuUrlArr = AuthenticationUtil.getMenuIdArr();
+			String[] authMenuUrlArr = AuthenticationUtils.getMenuIdArr();
 
 			if(authMenuUrlArr == null) {
                 respondError(HttpErrorCode.NO_AUTHORIZATION, request, response);
@@ -69,21 +69,21 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 	 * @param response 应答体
      */
 	private void setConstants(HttpServletResponse response) {
-		CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.ACCOUNT_ID.toString(), AuthenticationUtil.getAccountId());		//账户Id
-		CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.PERSON_NAME.toString(), AuthenticationUtil.getPersonId());		//人员Id
+		CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.ACCOUNT_ID.toString(), AuthenticationUtils.getAccountId());		//账户Id
+		CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.PERSON_NAME.toString(), AuthenticationUtils.getPersonId());		//人员Id
 		try {
-			if(StringUtils.isNotBlank( AuthenticationUtil.getDepartmentName() )) {
-				CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.DEPARTMENT_NAME.toString(), URLEncoder.encode(AuthenticationUtil.getDepartmentName(), "UTF-8"));	//企业名称
+			if(StringUtils.isNotBlank( AuthenticationUtils.getDepartmentName() )) {
+				CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.DEPARTMENT_NAME.toString(), URLEncoder.encode(AuthenticationUtils.getDepartmentName(), "UTF-8"));	//企业名称
 			} else {
-				CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.DEPARTMENT_NAME.toString(), "");
+				CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.DEPARTMENT_NAME.toString(), "");
 			}
-			if(StringUtils.isNotBlank( AuthenticationUtil.getAccountName() )) {
-				CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.ACCOUNT_NAME.toString(), URLEncoder.encode(AuthenticationUtil.getAccountName(), "UTF-8"));	//账户名称
+			if(StringUtils.isNotBlank( AuthenticationUtils.getAccountName() )) {
+				CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.ACCOUNT_NAME.toString(), URLEncoder.encode(AuthenticationUtils.getAccountName(), "UTF-8"));	//账户名称
 			}
-			if(StringUtils.isNotBlank( AuthenticationUtil.getPersonName() )) {
-				CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.PERSON_NAME.toString(), URLEncoder.encode(AuthenticationUtil.getPersonName(), "UTF-8"));	//人员名称
+			if(StringUtils.isNotBlank( AuthenticationUtils.getPersonName() )) {
+				CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.PERSON_NAME.toString(), URLEncoder.encode(AuthenticationUtils.getPersonName(), "UTF-8"));	//人员名称
 			} else {
-				CookieUtil.setUnsafeCookie(response, AuthenticationUtil.LoginInfo.PERSON_NAME.toString(), "");
+				CookieUtils.setUnsafeCookie(response, AuthenticationUtils.LoginInfo.PERSON_NAME.toString(), "");
 			}
 
 		} catch (UnsupportedEncodingException e) {

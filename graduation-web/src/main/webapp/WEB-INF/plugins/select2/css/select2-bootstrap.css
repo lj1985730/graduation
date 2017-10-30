@@ -202,6 +202,7 @@
   /**
      * Handle border radii of the container when the dropdown is showing.
      */
+  z-index: 10100;
 }
 
 .select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b {

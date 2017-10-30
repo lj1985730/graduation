@@ -2,14 +2,15 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.Account;
 import com.graduation.authentication.entity.AccountRole;
+import com.graduation.authentication.util.AuthenticationUtils;
 import com.graduation.core.system.service.SystemLoader;
-import com.graduation.authentication.util.AuthenticationUtil;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.security.Encryptor;
 import com.graduation.core.base.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.loader.custom.sql.SQLCustomQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,7 +93,7 @@ public class AccountService extends BaseService<Account> {
 	 */
 	public void modifyPassword(final String oldPass, final String newPass) {
 		// 查询当前用户数据库中密码
-		Account account = dao.get(Account.class, AuthenticationUtil.getInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID).toString());
+		Account account = dao.get(Account.class, AuthenticationUtils.getInfo(AuthenticationUtils.LoginInfo.ACCOUNT_ID).toString());
 		String savedPass = account.getPassword();
 	
 		//提交的新旧密码加密

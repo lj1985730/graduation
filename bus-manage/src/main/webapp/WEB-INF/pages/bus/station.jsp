@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@ include file="/WEB-INF/inc/common.inc" %>
+        <%@ include file="/WEB-INF/includes/common.inc" %>
         <script type="text/javascript" src="scripts/bus/station.js"></script>
     </head>
     <body class="page-boxed page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid">

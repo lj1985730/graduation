@@ -2,11 +2,11 @@ package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.*;
 import com.graduation.core.system.service.SystemLoader;
-import com.graduation.authentication.util.AuthenticationUtil;
+import com.graduation.authentication.util.AuthenticationUtils;
 import com.graduation.core.base.entity.BaseEntity;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.BaseService;
-import com.graduation.core.base.util.EntityUtil;
+import com.yonyou.utils.infrastructure.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
@@ -118,8 +118,8 @@ public class LoginService extends BaseService<BaseEntity> {
 			roleIdStr += roles.get(i).getId() + separator;
 			roleIdArr[i] = roles.get(i).getId();
 		}
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ROLE_ID, StringUtils.removeEnd(roleIdStr, separator));
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ROLE_ID_ARR, roleIdArr);
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.ROLE_ID, StringUtils.removeEnd(roleIdStr, separator));
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.ROLE_ID_ARR, roleIdArr);
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class LoginService extends BaseService<BaseEntity> {
 			postIdStr += posts.get(i).getId() + separator;
 			postIdArr[i] = posts.get(i).getId();
 		}
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.POST_ID, StringUtils.removeEnd(postIdStr, separator));
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.POST_ID_ARR, postIdArr);
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.POST_ID, StringUtils.removeEnd(postIdStr, separator));
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.POST_ID_ARR, postIdArr);
 	}
 
 	/**
@@ -148,9 +148,9 @@ public class LoginService extends BaseService<BaseEntity> {
 	 */
 	private void bookPersonInfo(Account account) {
 		Person person = account.getPerson();
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_ID, person.getId());
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_NAME, person.getName());
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.PERSON_EMAIL, person.getEmail());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.PERSON_ID, person.getId());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.PERSON_NAME, person.getName());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.PERSON_EMAIL, person.getEmail());
 	}
 
 	/**
@@ -158,9 +158,9 @@ public class LoginService extends BaseService<BaseEntity> {
 	 * @param account 账户信息
 	 */
 	private void bookAccountInfo(Account account) {
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ACCOUNT_ID, account.getId());
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.ACCOUNT_NAME, account.getName());
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.SUPER_ACCOUNT, account.getSuperAccount());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.ACCOUNT_ID, account.getId());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.ACCOUNT_NAME, account.getName());
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.SUPER_ACCOUNT, account.getSuperAccount());
 	}
 
 	/**
@@ -175,13 +175,13 @@ public class LoginService extends BaseService<BaseEntity> {
 		} else {
 			userMenu = menuService.getUserMenu(account.getId());
 		}
-		List<String> menuIds = EntityUtil.getAllId(userMenu);
+		List<String> menuIds = EntityUtils.getAllId(userMenu);
 		StringBuilder menuIdStr = new StringBuilder("");
 		menuIds.forEach(menuId -> menuIdStr.append(menuId).append(separator));
 
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_LIST, userMenu);	//Menu List
 	}
 
 
@@ -197,13 +197,13 @@ public class LoginService extends BaseService<BaseEntity> {
 		} else {
 			userMenu = menuService.getAllBackMenu(SystemLoader.getConfigValue("SYSTEM", null));
 		}
-		List<String> menuIds = EntityUtil.getAllId(userMenu);
+		List<String> menuIds = EntityUtils.getAllId(userMenu);
 		StringBuilder menuIdStr = new StringBuilder("");
 		menuIds.forEach(menuId -> menuIdStr.append(menuId).append(separator));
 
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
-		AuthenticationUtil.setInfo(AuthenticationUtil.LoginInfo.MENU_LIST, userMenu);	//Menu List
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_ID_ARR, menuIds.toArray());	//ID List
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_ID, StringUtils.removeEnd(menuIdStr.toString(), separator));	//Menu String
+		AuthenticationUtils.setInfo(AuthenticationUtils.LoginInfo.MENU_LIST, userMenu);	//Menu List
 	}
 
 	/**

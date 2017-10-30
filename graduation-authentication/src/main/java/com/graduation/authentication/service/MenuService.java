@@ -1,7 +1,7 @@
 package com.graduation.authentication.service;
 
 import com.graduation.authentication.entity.*;
-import com.graduation.authentication.util.AuthenticationUtil;
+import com.graduation.authentication.util.AuthenticationUtils;
 import com.graduation.core.base.exception.BusinessException;
 import com.graduation.core.base.service.TreeService;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ public class MenuService extends TreeService<Menu> {
 	 * @return 用户菜单
      */
 	public List<Menu> getAccountMenu() {
-		return AuthenticationUtil.getMenuList();
+		return AuthenticationUtils.getMenuList();
 	}
 
 	/**

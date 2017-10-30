@@ -63,7 +63,7 @@ class DepartmentController extends BaseController {
 	@RequestMapping(value = { "/{id}" })
 	@ResponseBody
 	public JsonResult search(@PathVariable("id") String id) {
-		return new JsonResult(service.get(id));
+		return new JsonResult(service.searchById(id));
 	}
 
 	/**
