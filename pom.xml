@@ -115,7 +115,7 @@
         <module>component-utils</module>
         <module>graduation-authentication</module>
         <module>graduation-database</module>
-        <module>component-workflow</module>
+        <!--<module>component-workflow</module>-->
         <module>bus-manage</module>
 
     </modules>
