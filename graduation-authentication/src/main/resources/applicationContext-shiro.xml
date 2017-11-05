@@ -94,7 +94,7 @@
                 /plugins/** = anon
                 /scripts/** = anon
                 /css/** = anon
-                /img/** = anon
+                /imgs/** = anon
                 /bus/home = anon
                 /bus/stations = anon
                 /bus/route/readonly = anon
