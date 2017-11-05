@@ -37,7 +37,7 @@
 		<!-- BEGIN LOGIN -->
 		<div class="content">
 		<!-- BEGIN LOGIN FORM -->
-			<h3 class="form-title">账户登录</h3>
+			<h3 class="form-title" style="color: #989393; font-weight: 500;">账户登录</h3>
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>
@@ -152,7 +152,7 @@
 				Metronic.init();
 				// 背景图片定时切换
 				$.backstretch([
-					"img/login/login_bg4.jpg"
+					"imgs/login/login_bg4.jpg"
 				], {
 					fade: 1000,
 					duration: 15000

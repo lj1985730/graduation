@@ -13,7 +13,7 @@
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="javascript:">
-                        <img src="img/logo-default.png" alt="logo" class="logo-default"/>
+                        <img src="imgs/logo-default.png" alt="logo" class="logo-default"/>
                     </a>
                     <div class="menu-toggler sidebar-toggler">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -33,7 +33,7 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="img/avatar3_small.jpg"/>
+                                    <img alt="" class="img-circle" src="imgs/avatar3_small.jpg"/>
                                     <span class="username username-hide-on-mobile">游客</span>
                                 </a>
                             </li>

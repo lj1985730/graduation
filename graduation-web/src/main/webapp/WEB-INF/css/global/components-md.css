@@ -2667,7 +2667,7 @@ Customized Bootstrap Close Icon
   background-repeat: no-repeat !important;
   text-indent: -10000px;
   outline: none;
-  background-image: url("img/remove-icon-small.png") !important;
+  background-image: url("imgs/remove-icon-small.png") !important;
 }
 
 /***
@@ -3550,7 +3550,7 @@ input[type="url"].spinner,
 input[type="search"].spinner,
 input[type="tel"].spinner,
 input[type="color"].spinner {
-  background-image: url("img/input-spinner.gif") !important;
+  background-image: url("imgs/global/input-spinner.gif") !important;
   background-repeat: no-repeat;
   background-position: right 8px;
 }
@@ -4192,7 +4192,7 @@ Metro icons
   margin-top: 3px;
   line-height: 14px;
   vertical-align: top;
-  background-image: url(img/syncfusion-icons.png);
+  background-image: url(imgs/global/syncfusion-icons.png);
   background-position: 0 0;
   background-repeat: no-repeat;
 }
